@@ -29,14 +29,14 @@ var UserSchema = new mongoose.Schema({
         last: { type: String,  index: { unique: false }}
     }
 
-    pets : [new moongoose.Schema({
-            nomePet: { type: String },
-            tipoPet: { type: String },
-            racaPet: { type: String },
-            nascimentoPet: { type: Date }
-        },
-        {_id: false}}
-    )]
+    // pets : [new moongoose.Schema({
+    //         nomePet: { type: String },
+    //         tipoPet: { type: String },
+    //         racaPet: { type: String },
+    //         nascimentoPet: { type: Date }
+    //     },
+    //     {_id: false}}
+    // )]
 
     // birthday: {
     //     day: {type: Number, min:1, max:31, required: false},
@@ -69,18 +69,18 @@ module.exports = {
         });
     },
 
-    addPets: function(user, pets){
-        console.log('Registering ' + user.username + 'pets ');
+    // addPets: function(user, pets){
+    //     console.log('Registering ' + user.username + 'pets ');
 
-        user.pets: pets
+    //     user.pets: pets
 
-        user.update(function(err){
-            if(err)
-                callback("ErrorSavingPets");
+    //     user.update(function(err){
+    //         if(err)
+    //             callback("ErrorSavingPets");
 
-            callback(null, user);
-        });
-    },
+    //         callback(null, user);
+    //     });
+    // },
 
     findOrCreateOauthUser: function(provider, providerId, firtsName, lastName, callback) {
         User.findOne({provider: providerId}, function(err, doc){
