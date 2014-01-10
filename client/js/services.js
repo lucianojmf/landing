@@ -31,6 +31,12 @@ angular.module('petiko')
                 success();
             }).error(error);
         },
+        // registerPets: function(user, pets, sucess, error){
+        //     alert(JSON.stringify(pets));
+        //     $http.post('/registerPets', user, pets).success(function(res){
+        //         success(data.user);
+        //     }).error(error);
+        // },
         login: function(user, success, error) {
             $http.post('/login', user).success(function(user){
                 changeUser(user);

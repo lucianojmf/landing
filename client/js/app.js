@@ -26,12 +26,15 @@ angular.module('petiko', ['ngCookies', 'ngRoute'])
         });
     $routeProvider.when('/profile',
         {
+<<<<<<< HEAD
             templateUrl:    'profile',
             controller:     'ProfileCtrl',
             access:         access.user
         });
     $routeProvider.when('/profileEdit',
         {
+=======
+>>>>>>> 41a30a77c82108fe54e16d34ae3d0c9be100509c
             templateUrl:    'profile',
             controller:     'ProfileCtrl',
             access:         access.user

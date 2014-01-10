@@ -69,20 +69,11 @@ angular.module('petiko')
 }]);
 
 angular.module('petiko')
-.controller('UserCtrl',
-['$rootScope', '$scope', function($rootScope, $scope) {
-    $scope.list = [{}];
-
-    $scope.petRegister = function() {
-        
-    };
-}]);
-
-angular.module('petiko')
 .controller('ProfileCtrl',
-['$rootScope', '$scope', function($rootScope, $scope) {
+['$rootScope', '$scope', 'Auth', '$location', function($rootScope, $scope, Auth, $location) {
+    $scope.user = Auth.user;
     $scope.listPets = {
-        options: [],
+        options: [$scope.user.pets],
         option_new: {nomePet: '', tipoPet: '', racaPet: '', nascimentoPet: ''}
     };
 
@@ -95,7 +86,20 @@ angular.module('petiko')
     }
 
     $scope.registerPets = function() {
-        alert(JSON.stringify($scope.listPets.options));
+        // alert($scope.listPets.options);
+
+        // Auth.registerPets(
+        
+        // user: $scope.user,
+        
+        // pets: $scope.listPets.options,
+
+        // function(){
+        //     $location.path('/profile');
+        // },
+        // function(err) {
+        //     $rootScope.error = err;
+        // });
     }
 
     $scope.delete = function(idx){
