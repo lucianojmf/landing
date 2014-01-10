@@ -86,16 +86,16 @@ angular.module('petiko')
     }
 
     $scope.registerPets = function() {
-        // Auth.registerPets({
-        //     user: $scope.user,
-        //     pets: $scope.listPets.options
-        // },
-        // function(){
-        //     $location.path('/profile');
-        // },
-        // function(err) {
-        //     $rootScope.error = err;
-        // });
+        Auth.registerPets({
+            user: $scope.user,
+            pets: $scope.listPets.options
+        },
+        function(){
+            $location.path('/profile');
+        },
+        function(err) {
+            $rootScope.error = err;
+        });
     }
 
     $scope.delete = function(idx){
