@@ -35,7 +35,7 @@ var UserSchema = new mongoose.Schema({
         last: { type: String,  index: { unique: false }}
     },
 
-    pets: [pet]
+    pets: [PetSchema]
     
     // birthday: {
     //     day: {type: Number, min:1, max:31, required: false},
