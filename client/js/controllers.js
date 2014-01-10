@@ -86,10 +86,14 @@ angular.module('petiko')
     }
 
     $scope.registerPets = function() {
-        Auth.registerPets({
-            user: $scope.user,
-            pets: $scope.listPets.options
-        },
+        alert($scope.listPets.options);
+
+        Auth.registerPets(
+        
+        user: $scope.user,
+        
+        pets: $scope.listPets.options,
+
         function(){
             $location.path('/profile');
         },
