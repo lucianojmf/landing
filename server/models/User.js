@@ -68,6 +68,19 @@ module.exports = {
         });
     },
 
+    addPets: function(user, pets){
+        console.log('Registering ' + user.username + 'pets ');
+
+        user.pets: pets
+
+        user.update(function(err){
+            if(err)
+                callback("ErrorSavingPets");
+
+            callback(null, user);
+        });
+    },
+
     findOrCreateOauthUser: function(provider, providerId, firtsName, lastName, callback) {
         User.findOne({provider: providerId}, function(err, doc){
             if(err){
