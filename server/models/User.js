@@ -71,7 +71,9 @@ module.exports = {
     addPets: function(user, pets){
         console.log('Registering ' + user.username + 'pets ');
 
-        user.pets: pets
+        var user = findByUsername(user.username);
+
+        user.pets = pets;
 
         user.save(function(err){
             if(err)
