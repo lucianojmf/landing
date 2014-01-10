@@ -5,15 +5,17 @@ html(lang='en', data-ng-app='petiko')
         title Petiko
         link(rel='stylesheet', href='css/app.css')
         link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", rel="stylesheet")
-
-        // This is needed because Facebook login redirects add #_=_ at the end of the URL
+        link(rel="icon" type="image/png" href='img/icon.png')
         script(type="text/javascript").
             if (window.location.href.indexOf('#_=_') > 0) {
                 window.location = window.location.href.replace(/#.*/, '');
             }
     body(data-ng-cloak)
         nav.navbar.navbar-default(role='navigation', data-ng-controller="NavCtrl")
-            ul.nav.navbar-nav
+            a.navbar-brand(href='/')
+                img(src='/img/logoSimples.png')
+
+            ul.nav.navbar-nav.navbar-right
                 li(data-access-level='accessLevels.anon', active-nav)
                     a(href='/login') Log in
                 li(data-access-level='accessLevels.anon', active-nav)
@@ -27,7 +29,7 @@ html(lang='en', data-ng-app='petiko')
                 li(data-access-level='accessLevels.user')
                     a(href="", data-ng-click="logout()")
                         | Log out
-            div#userInfo.pull-right(data-access-level='accessLevels.user')
+            div#userInfo(data-access-level='accessLevels.user')
                 | Welcome&nbsp;
                 strong {{ user.username }}&nbsp;
                 span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}

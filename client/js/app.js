@@ -79,7 +79,7 @@ angular.module('petiko', ['ngCookies', 'ngRoute'])
             $rootScope.error = null;
             if (!Auth.authorize(next.access)) {
                 if(Auth.isLoggedIn()) $location.path('/');
-                else                  $location.path('/login');
+                else                  $location.path('/register');
             }
         });
 

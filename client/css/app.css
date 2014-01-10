@@ -2,17 +2,39 @@
     display: none;
 }
 
-body {
-    font-size: 1em;
+/*------ RESSET DE FONTE ---------------------------------------------*/
+@font-face {
+    font-family: Abstrec;
+    src: url(../font/Abstrec_font_tfb.ttf);
 }
 
-#cover {
+
+
+
+.navbar-nav{
+    padding-top: 30px;
+}
+/*.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+.navbar-brand{
+    float:none !important;
+}*/
+
+body {
+    font-family: "Abstrec" !important;
+}
+
+/*#cover {
     position:absolute;
     height:100%;
     width:100%;
     background:white;
 }
-
+*/
 #userInfo {
     float:right;padding:8px;
 }
