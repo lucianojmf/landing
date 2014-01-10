@@ -1,5 +1,4 @@
-var //User
-    //, _ =               require('underscore')
+var 
     passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
     , TwitterStrategy = require('passport-twitter').Strategy
@@ -40,29 +39,18 @@ var UserSchema = new mongoose.Schema({
 });
 var User = mongoose.model('User', UserSchema);
 
-// var users = [
-//     {
-//         id:         1,
-//         username:   "user",
-//         password:   "123",
-//         role:   userRoles.user
-//     },
-//     {
-//         id:         2,
-//         username:   "admin",
-//         password:   "123",
-//         role:   userRoles.admin
-//     }
-// ];
-
 module.exports = {
     addUser: function(username, password, role, callback) {
+        console.log('Registering ' + username);
+        console.log('Role ' + role.bitMask);
+        console.log('Role ' + role.title);
+        
         var shaSum = crypto.createHash('sha256');
         shaSum.update(password);
         var user = new User({
             username: username,
             password: shaSum.digest('hex'),
-            role: role
+            role: {bitMask:role.bitMask, title: role.title}
         });
         user.save(function(err){
             if(err)
@@ -72,7 +60,7 @@ module.exports = {
         });
     },
 
-    findOrCreateOauthUser: function(provider, providerId, firtsName, lastName) {
+    findOrCreateOauthUser: function(provider, providerId, firtsName, lastName, callback) {
         User.findOne({provider: providerId}, function(err, doc){
             if(err){
                 console.log(err);
@@ -100,12 +88,14 @@ module.exports = {
         });
     },
 
-    findAll: function() {
+    findAll: function(callback) {
         User.find({}, function(err, users){
-            if(err)
-                console.log(err);
-            else
-                return users;
+            if(err){
+                callback(err, null);
+            }
+            else{
+                callback(null, users);
+            }
         });
     },
 
@@ -140,7 +130,6 @@ module.exports = {
                     done(null, false, {message: 'Error on search.'})
                 }
                 if(doc){
-                    console.log(doc);
                     return done(null, doc);
                 }else{
                     return done(null, false, { message: 'Incorrect username.' });

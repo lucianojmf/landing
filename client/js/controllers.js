@@ -80,6 +80,7 @@ angular.module('petiko')
     $scope.loading = true;
     $scope.userRoles = Auth.userRoles;
 
+    
     Users.getAll(function(res) {
         $scope.users = res;
         $scope.loading = false;

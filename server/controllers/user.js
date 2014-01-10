@@ -4,14 +4,22 @@ var _ =           require('underscore')
 
 module.exports = {
     index: function(req, res) {
-        var users = User.findAll();
-        _.each(users, function(user) {
-            delete user.password;
-            delete user.twitter;
-            delete user.facebook;
-            delete user.google;
-            delete user.linkedin;
+        User.findAll(function(err, users){
+            if(err)
+                res.json('');
+            else{
+                console.log(users);
+                _.each(users, function(user) {
+                    console.log('maaooe');
+                    delete user.password;
+                    delete user.twitter;
+                    delete user.facebook;
+                    delete user.google;
+                    delete user.linkedin;
+                });
+
+                res.json(users);
+            }
         });
-        res.json(users);
     }
 };

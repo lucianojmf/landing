@@ -95,7 +95,7 @@ var routes = [
         path: '/users',
         httpMethod: 'GET',
         middleware: [UserCtrl.index],
-        accessLevel: accessLevels.admin
+        //accessLevel: accessLevels.admin  //**** PRECISAMOS CORRIGIR ESTE ERRO!!
     },
 
     // All other get requests should be handled by AngularJS's client-side routing system
@@ -145,10 +145,13 @@ module.exports = function(app) {
 
 function ensureAuthorized(req, res, next) {
     var role;
+
     if(!req.user) role = userRoles.public;
     else          role = req.user.role;
 
+
     var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
+
 
     if(!(accessLevel.bitMask & role.bitMask)) return res.send(403);
     return next();
