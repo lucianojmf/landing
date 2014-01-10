@@ -23,8 +23,7 @@
 .navbar-brand{
     float:none !important;
 }*/
-
-body {
+h1, h2, h3, h4, h5, label, strong {
     font-family: "Abstrec" !important;
 }
 
