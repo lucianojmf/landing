@@ -49,10 +49,6 @@ var User = mongoose.model('User', UserSchema);
 
 module.exports = {
     addUser: function(username, password, role, callback) {
-        console.log('Registering ' + username);
-        console.log('Role ' + role.bitMask);
-        console.log('Role ' + role.title);
-        
         var shaSum = crypto.createHash('sha256');
         shaSum.update(password);
         var user = new User({

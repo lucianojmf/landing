@@ -2,8 +2,6 @@
     .container
         .sloganPetiko.pull-right
             img(src='img/logo.png')
-
-
 .barAzul
     .container
         h1.text-center
@@ -15,21 +13,21 @@
             .col-sm-3.col-md-3.col-lg-3
                 .thumbnail
                     .caption
-                        img.text-center(src='/img/aprenda.png' alt='Aprenda')
+                        img.center-block(src='/img/aprenda.png' alt='Aprenda')
                         h3.text-center Aprenda
                         p Usuarios do PetiKo possuem conteúdo filtrado para seu perfil de interesse de acordo com seu animal de estimação
                         p Veja de forma prática as notícias para seu gatinho, as dicas de aquário caso tenha um peixe, ou informações variadas sobre seu poodle
             .col-sm-3.col-md-3.col-lg-3
                 .thumbnail
                     .caption
-                        img.text-center(src='/img/divirtase.png' alt='Divirta-se')
+                        img.center-block(src='/img/divirtase.png' alt='Divirta-se')
                         h3.text-center Divirta-se
                         p Utilize nossos Quizzes para obter conhecimento brincando, melhore a vida do seu amiguinho aprendendo sobre: Raças, Nutrição, Saúde, Adestramento, Dicas, e muito mais
                         p Além disso, para cada resposta correta você será recompensado com PetiKets
             .col-sm-3.col-md-3.col-lg-3
                 .thumbnail
                     .caption
-                        img.text-center(src='/img/coopere.png' alt='Coopere')
+                        img.center-block(src='/img/coopere.png' alt='Coopere')
                         h3.text-center Coopere
                         p Mantenha contato com outras pessoas que possuem os mesmos animais que você
                         p Participe das nossas Threads de perguntas e respostas, tire suas dúvidas e também ajude outras pessoas com seu conehcimento
@@ -37,31 +35,42 @@
             .col-sm-3.col-md-3.col-lg-3
                 .thumbnail
                     .caption
-                        img.text-center(src='/img/recompensa.png' alt='Divirta-se')
+                        img.center-block(src='/img/recompensa.png' alt='Divirta-se')
                         h3.text-center Recompensas
                         p Com os Petikets acumulados, você poderá trocar por brindes e descontos promocionais de nosos parceiros
                         p Veja qual o prêmio que mais lhe interessa, as condições de retirada, e o total de Petikets necessários para a troca
                         p Simples assim, no Petiko diversão + conhecimento = Prêmios
+.barVerde
+    .container
+        h1.text-center
+          strong Ganhe PetiKets entrando na lista de espera
 
-form.form-horizontal(ng-submit="register()", name="registerForm")
-    .control-group
-        label.control-label(for="username") Email
-        .controls
-            input(type="text", data-ng-model="username", placeholder="Email", name="username", required, data-ng-minlength="1", data-ng-maxlength="20", autofocus)
-    .control-group
-        label.control-label(for="password") Password
-        .controls
-            input(type="password", data-ng-model="password", placeholder="Password", name="password", required, data-ng-minlength="5", data-ng-maxlength="60")
-    .control-group
-        .controls
-            button.btn(type="submit", data-ng-disabled="registerForm.$invalid") Submit
-
-    .alert.alert-error(ng-show="registerForm.$invalid && registerForm.$dirty")
-        strong Please correct the following errors:
-        ul
-            li(ng-show="registerForm.username.$error.required") Username is required
-            li(ng-show="registerForm.username.$error.minlength") Username has to be at least 1 character long
-            li(ng-show="registerForm.username.$error.maxlength") Username has to be at most 20 character long
-            li(ng-show="registerForm.password.$error.required") Password is required
-            li(ng-show="registerForm.password.$error.minlength") Password must be at least 5 characters long
-            li(ng-show="registerForm.password.$error.maxlength") Password must be at most 60 characters long
+.cadastro
+    .container
+        .row
+            .col-sm-6.col-md-6.col-lg-6
+                br
+                h4 Cadastre-se usando sua conta em uma das redes sociais abaixo
+                .col-sm-3.col-md-3.col-lg-3.col-
+                    a.center-block(href="", data-ng-click="loginOauth('facebook')", title="Facebook")
+                        img(src='/img/facebook.png')
+                .col-sm-3.col-md-3.col-lg-3
+                    a.center-block(href="", data-ng-click="loginOauth('twitter')", title="Twitter")
+                        img(src='/img/twitter.png')
+                .col-sm-3.col-md-3.col-lg-3
+                    a.center-block(href="", data-ng-click="loginOauth('google')", , title="Google")
+                        img(src='/img/google.png')
+                br
+            .col-sm-6.col-md-6.col-lg-6
+                br
+                h4 Ou se preferir, complete o cadastro manualmente
+                br
+                form(role='form', ng-submit="register()", name="registerForm")
+                    .form-group
+                        label(for="email") E-mail
+                        input.form-control(type="text", data-ng-model="username", placeholder="Email", name="username", required, data-ng-minlength="1", data-ng-maxlength="20", autofocus)
+                    .form-group
+                        label(for="password") Senha
+                        input.form-control(type="password", data-ng-model="password", placeholder="Senha", name="password", required, data-ng-minlength="5", data-ng-maxlength="15")
+                    .form-group
+                        button.btn.btn-success.btn-lg.btn-block(type="submit", data-ng-disabled="registerForm.$invalid") Cadastrar
