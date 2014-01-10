@@ -118,7 +118,7 @@ module.exports = {
     },
 
     validate: function(user) {
-        check(user.username, 'Username must be 1-20 characters long').len(1, 20);
+        check(user.username, 'Username must be an Email and must be 1-20 characters long').len(6, 100).isEmail();
     },
 
     localStrategy: new LocalStrategy(

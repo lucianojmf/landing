@@ -69,6 +69,42 @@ angular.module('petiko')
 }]);
 
 angular.module('petiko')
+.controller('UserCtrl',
+['$rootScope', '$scope', function($rootScope, $scope) {
+    $scope.list = [{}];
+
+    $scope.petRegister = function() {
+        
+    };
+}]);
+
+angular.module('petiko')
+.controller('ProfileCtrl',
+['$rootScope', '$scope', function($rootScope, $scope) {
+    $scope.listPets = {
+        options: [],
+        option_new: {nomePet: '', tipoPet: '', racaPet: '', nascimentoPet: ''}
+    };
+
+    $scope.add = function() {
+        // add the new option to the model
+        $scope.listPets.options.push($scope.listPets.option_new);
+        
+        // clear the option.
+        $scope.listPets.option_new = {nomePet: '', tipoPet: '', racaPet: '', nascimentoPet: ''};
+    }
+
+    $scope.registerPets = function() {
+        alert(JSON.stringify($scope.listPets.options));
+    }
+
+    $scope.delete = function(idx){
+        $scope.listPets.options.splice(idx,1);
+    }
+    
+}]);
+
+angular.module('petiko')
 .controller('PrivateCtrl',
 ['$rootScope', function($rootScope) {
 }]);

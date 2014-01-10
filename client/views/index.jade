@@ -14,6 +14,7 @@ html(lang='en', data-ng-app='petiko')
             }
     body(data-ng-cloak)
 
+<<<<<<< HEAD
         nav.navbar.navbar-default(role='navigation', data-ng-controller="NavCtrl")
             ul.nav.navbar-nav
                 li(data-access-level='accessLevels.anon', active-nav)
@@ -33,6 +34,31 @@ html(lang='en', data-ng-app='petiko')
                 | Welcome&nbsp;
                 strong {{ user.username }}&nbsp;
                 span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+=======
+        .navbar(data-ng-controller="NavCtrl")
+            .navbar-inner
+                .container-fluid
+                    ul.nav
+                        li(data-access-level='accessLevels.anon', active-nav)
+                            a(href='/login') Log in
+                        li(data-access-level='accessLevels.anon', active-nav)
+                            a(href='/register') Register
+                        li(data-access-level='accessLevels.user', active-nav)
+                            a(href='/') Home
+                        li(data-access-level='accessLevels.user', active-nav)
+                            a(href='/private') Private
+                        li(data-access-level='accessLevels.user', active-nav)
+                            a(href='/profileEdit') Profile
+                        li(data-access-level='accessLevels.admin', active-nav)
+                            a(href='/admin') Admin
+                        li(data-access-level='accessLevels.user')
+                            a(href="", data-ng-click="logout()")
+                                | Log out
+                    div#userInfo.pull-right(data-access-level='accessLevels.user')
+                        | Welcome&nbsp;
+                        strong {{ user.username }}&nbsp;
+                        span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
+>>>>>>> e6f63d6ea3c5bd5aeac1f2ea35f665d04990031c
 
         .container
             div(data-ng-view='ng-view')
@@ -61,5 +87,7 @@ html(lang='en', data-ng-app='petiko')
             include partials/login
         script(type="text/ng-template", id="private")
             include partials/private
+        script(type="text/ng-template", id="profile")
+            include partials/profileEdit
         script(type="text/ng-template", id="register")
             include partials/register
