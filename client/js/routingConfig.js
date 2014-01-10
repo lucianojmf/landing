@@ -55,10 +55,12 @@
     contain an array for each access level containing the allowed user roles.
      */
     function buildAccessLevels(accessLevelDeclarations, userRoles){
-
         var accessLevels = {};
-        for(var level in accessLevelDeclarations){
+        console.log('access ' +  accessLevelDeclarations);
+        console.log('userRoles ' +  userRoles);
 
+        for(var level in accessLevelDeclarations){
+             console.log('for ' + level);
             if(typeof accessLevelDeclarations[level] == 'string'){
                 if(accessLevelDeclarations[level] == '*'){
 
@@ -90,7 +92,7 @@
                 };
             }
         }
-
+        console.log('final ' + accessLevels);
         return accessLevels;
     }
 
