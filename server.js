@@ -8,7 +8,7 @@ var app = module.exports = express();
 
 // Import the data layer
 var mongoose = require('mongoose');
-var dbPath = 'mongodb://localhost/petiko'; //***** TEMOS QUE MUDAR ISSO AQUI
+var dbPath = process.env.MONGOHQ_URL || 'mongodb://localhost/petiko';
 
 var models = {
 	User: require('./server/models/User.js')
@@ -29,7 +29,7 @@ app.use(express.cookieSession(
 
 app.configure('development', 'production', function() {
     //app.use(express.csrf());
-    
+
     mongoose.connect(dbPath, function onMongooseError(err) {
 		if (err) throw err;
 	});
