@@ -1,24 +1,5 @@
-h1 Pets Register
-    .control-group(ng-repeat="option in listPets.options")
-        .controls
-            label Pet {{$index+1}}
-            input(type="text", data-ng-model="option.nomePet", data-ng-change="change()", placeholder="Nome", name="option.nomePet", data-ng-minlength="1", data-ng-maxlength="30", autofocus)
-            input(type="text", data-ng-model="option.tipoPet", data-ng-change="change()", placeholder="Cachorro, gato, peixe...", name="option.tipoPet", data-ng-minlength="1", data-ng-maxlength="30", autofocus)   
-            input(type="text", data-ng-model="option.racaPet", data-ng-change="change()", placeholder="Raça", name="option.racaPet", data-ng-minlength="1", data-ng-maxlength="30", autofocus)
-            input(type="text", data-ng-model="option.nascimentoPet", data-ng-change="change()", placeholder="Nascimento (dd/mm/aaaa)", name="option.nascimentoPet", autofocus)
-            button.btn-mini(ng-click="delete($index)") Delete
-            br 
+.container
+    h3 Bem vindo ao PetiKo
 
-    .control-group
-        label Pet {{listPets.options.length + 1}}
-        input(type="text", data-ng-model="listPets.option_new.nomePet", placeholder="Nome", name="listPets.option_new.nomePet", data-ng-minlength="1", data-ng-maxlength="30", autofocus)
-        input(type="text", data-ng-model="listPets.option_new.tipoPet", placeholder="Tipo: Cachorro, gato, peixe..", name="listPets.option_new.tipoPet", data-ng-minlength="1", data-ng-maxlength="30", autofocus)   
-        input(type="text", data-ng-model="listPets.option_new.racaPet", placeholder="Raça", name="listPets.option_new.racaPet", data-ng-minlength="1", data-ng-maxlength="30", autofocus)
-        input(type="text", data-ng-model="listPets.option_new.nascimentoPet", placeholder="Nascimento (dd/mm/aaaa)", name="listPets.option_new.nascimentoPet", autofocus)
-        br 
-
-        button.btn(ng-click="add()") Add pet
-
-    .control-group
-        .controls
-            button.btn(ng-click="registerPets()") Save
+    h4 Seu saldo atual é:
+    h1.text-center PKs 15,00

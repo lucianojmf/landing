@@ -22,6 +22,7 @@ angular.module('petiko')
 ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
 
     $scope.rememberme = true;
+    $scope.userRole = Auth.userRoles.user;
     $scope.login = function() {
         Auth.login({
                 username: $scope.username,
@@ -29,7 +30,11 @@ angular.module('petiko')
                 rememberme: $scope.rememberme
             },
             function(res) {
-                $location.path('/');
+                //se for usuario, redireciona para o perfil
+                if(res.role.bitMask == $scope.userRole.bitMask)
+                    $location.path('/profile');                    
+                else
+                    $location.path('/');
             },
             function(err) {
                 $rootScope.error = "Failed to login";
@@ -76,6 +81,10 @@ angular.module('petiko')
         options: [$scope.user.pets],
         option_new: {nomePet: '', tipoPet: '', racaPet: '', nascimentoPet: ''}
     };
+
+    $scope.addPet = function(){
+        
+    }
 
     $scope.add = function() {
         // add the new option to the model

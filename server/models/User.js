@@ -11,12 +11,13 @@ var
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
 var PetSchema = new mongoose.Schema({
-            nomePet: { type: String },
-            tipoPet: { type: String },
-            racaPet: { type: String },
-            nascimentoPet: { type: Date }
+    nomePet: { type: String },
+    tipoPet: { type: String },
+    racaPet: { type: String },
+    nascimentoPet: { type: Date }
 });
 
+var Pet = mongoose.model('Pet', PetSchema);
 
 // Modelo de conta --------------------------------------------------
 var UserSchema = new mongoose.Schema({
@@ -35,7 +36,7 @@ var UserSchema = new mongoose.Schema({
         last: { type: String,  index: { unique: false }}
     },
 
-    pets: [PetSchema]
+    pets: [Pet]
     
     // birthday: {
     //     day: {type: Number, min:1, max:31, required: false},
@@ -79,28 +80,22 @@ module.exports = {
     //     });
     // },
 
-    findOrCreateOauthUser: function(provider, providerId, firtsName, lastName, callback) {
+    findOrCreateOauthUser: function(provider, providerId) {
         User.findOne({provider: providerId}, function(err, doc){
             if(err){
-                console.log(err);
                 return false;
             }else if(doc){
-                console.log(doc);
                 return false;
             }else{
                 var user = new User({
                     username: provider + '_user',
-                    name: {first: firtsName, last: lastName},
                     role: userRoles.user,
                     provider: providerId
                 });
 
                 user.save(function(err){
                     if(err)
-                        console.log(err)
-
-                    callback(null, user);
-
+                        return false;
                 });
                 return user;
             }

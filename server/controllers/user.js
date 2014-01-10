@@ -8,9 +8,7 @@ module.exports = {
             if(err)
                 res.json('');
             else{
-                console.log(users);
                 _.each(users, function(user) {
-                    console.log('maaooe');
                     delete user.password;
                     delete user.twitter;
                     delete user.facebook;

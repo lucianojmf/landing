@@ -8,6 +8,11 @@
     src: url(../font/Abstrec_font_tfb.ttf);
 }
 
+@media (min-width: 768px){
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 0 !important;
+    }
+}
 
 
 

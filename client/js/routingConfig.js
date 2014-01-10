@@ -56,11 +56,7 @@
      */
     function buildAccessLevels(accessLevelDeclarations, userRoles){
         var accessLevels = {};
-        console.log('access ' +  accessLevelDeclarations);
-        console.log('userRoles ' +  userRoles);
-
         for(var level in accessLevelDeclarations){
-             console.log('for ' + level);
             if(typeof accessLevelDeclarations[level] == 'string'){
                 if(accessLevelDeclarations[level] == '*'){
 
@@ -92,7 +88,6 @@
                 };
             }
         }
-        console.log('final ' + accessLevels);
         return accessLevels;
     }
 
