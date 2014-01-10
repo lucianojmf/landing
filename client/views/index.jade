@@ -39,8 +39,7 @@ html(lang='en', data-ng-app='petiko')
                 li(data-access-level='accessLevels.admin', active-nav)
                     a(href='/admin') Admin
                 li(data-access-level='accessLevels.user')
-                    a(href="", data-ng-click="logout()")
-                        | Log out
+                    a(href="", data-ng-click="logout()") Sair
             div#userInfo(data-access-level='accessLevels.user')
                 | Welcome&nbsp;
                 strong {{ user.username }}&nbsp;

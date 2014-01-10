@@ -60,7 +60,7 @@ angular.module('petiko')
                 role: $scope.userRoles.user
             },
             function() {
-                $location.path('/');
+                $location.path('/profile');
             },
             function(err) {
                 $rootScope.error = err;
