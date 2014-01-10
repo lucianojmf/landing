@@ -21,12 +21,12 @@ module.exports = {
         });
     },
 
-    registerPets: function(req, res, next){
-        User.addPets(req.body.user, req.body.pets, function(err, user){
-            if(err === 'ErrorSavingPets') return res.send(402, "Problem where saving your pets, try again, please :)");
-            else if(err)                  return res.send(500);
-        });
-    },
+    // registerPets: function(req, res, next){
+    //     User.addPets(req.body.user, req.body.pets, function(err, user){
+    //         if(err === 'ErrorSavingPets') return res.send(402, "Problem where saving your pets, try again, please :)");
+    //         else if(err)                  return res.send(500);
+    //     });
+    // },
 
     login: function(req, res, next) {
         passport.authenticate('local', function(err, user) {

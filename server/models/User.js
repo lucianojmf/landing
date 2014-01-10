@@ -68,20 +68,20 @@ module.exports = {
         });
     },
 
-    addPets: function(user, pets){
-        console.log('Registering ' + user.username + 'pets ');
+    // addPets: function(user, pets){
+    //     console.log('Registering ' + user.username + 'pets ');
 
-        var user = findByUsername(user.username);
+    //     var user = findByUsername(user.username);
 
-        user.pets = pets;
+    //     user.pets = pets;
 
-        user.save(function(err){
-            if(err)
-                callback("ErrorSavingPets");
+    //     user.save(function(err){
+    //         if(err)
+    //             callback("ErrorSavingPets");
 
-            callback(null, user);
-        });
-    },
+    //         callback(null, user);
+    //     });
+    // },
 
     findOrCreateOauthUser: function(provider, providerId, firtsName, lastName, callback) {
         User.findOne({provider: providerId}, function(err, doc){
