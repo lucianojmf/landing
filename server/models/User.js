@@ -10,7 +10,7 @@ var
     , mongoose = require('mongoose')
     , userRoles =       require('../../client/js/routingConfig').userRoles;
 
-var PetSchema = new moongoose.Schema({
+var PetSchema = new mongoose.Schema({
             nomePet: { type: String },
             tipoPet: { type: String },
             racaPet: { type: String },
@@ -35,7 +35,7 @@ var UserSchema = new mongoose.Schema({
         last: { type: String,  index: { unique: false }}
     },
 
-    // pets: [pet]
+    pets: [pet]
     
     // birthday: {
     //     day: {type: Number, min:1, max:31, required: false},
