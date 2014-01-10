@@ -11,7 +11,7 @@ html(lang='en', data-ng-app='petiko')
                 window.location = window.location.href.replace(/#.*/, '');
             }
     body(data-ng-cloak)
-        nav.navbar.navbar-default(role='navigation', data-ng-controller="NavCtrl")
+        nav.navbar.navbar-default.navbar-petiko(role='navigation', data-ng-controller="NavCtrl")
             a.navbar-brand(href='/')
                 img(src='/img/logoSimples.png')
 
@@ -33,9 +33,9 @@ html(lang='en', data-ng-app='petiko')
                 | Welcome&nbsp;
                 strong {{ user.username }}&nbsp;
                 span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
-        .container
-            div(data-ng-view='ng-view')
-            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
+        
+    div(data-ng-view='ng-view')
+        .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
         script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js')
         script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js')

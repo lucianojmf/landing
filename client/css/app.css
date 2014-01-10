@@ -14,6 +14,9 @@
 .navbar-nav{
     padding-top: 30px;
 }
+.navbar-petiko{
+    margin-bottom: 0px !important;
+}
 /*.navbar-header {
     float: left;
     padding: 15px;
@@ -27,13 +30,30 @@ h1, h2, h3, h4, h5, label, strong {
     font-family: "Abstrec" !important;
 }
 
-/*#cover {
-    position:absolute;
-    height:100%;
-    width:100%;
-    background:white;
+.slide{
+    height: 560px;
+    background: url('../img/capa3.jpg') no-repeat left center; 
+    margin: 0px;
 }
-*/
+
+.sloganPetiko{
+    padding-top: 250px;
+    /*vertical-align: middle;*/
+}
+
+.barAzul{
+    margin-top: -5px;
+    height: 100px;
+    background: #049ed3;
+    padding: 20px;
+}
+.barAzul h1{
+    color: #fff !important;
+}
+.thumbnail{
+    border: none !important;
+}
+
 #userInfo {
     float:right;padding:8px;
 }
