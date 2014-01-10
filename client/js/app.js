@@ -24,6 +24,18 @@ angular.module('petiko', ['ngCookies', 'ngRoute'])
             controller:     'RegisterCtrl',
             access:         access.anon
         });
+    $routeProvider.when('/profile',
+        {
+            templateUrl:    'user',
+            controller:     'UserCtrl',
+            access:         access.user
+        });
+    $routeProvider.when('/profileEdit',
+        {
+            templateUrl:    'profile',
+            controller:     'ProfileCtrl',
+            access:         access.user
+        });
     $routeProvider.when('/private',
         {
             templateUrl:    'private',
