@@ -57,7 +57,7 @@ angular.module('petiko')
         Auth.register({
                 username: $scope.username,
                 password: $scope.password,
-                role: $scope.role
+                role: $scope.userRoles.user
             },
             function() {
                 $location.path('/');
