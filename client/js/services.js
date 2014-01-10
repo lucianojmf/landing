@@ -32,7 +32,7 @@ angular.module('petiko')
             }).error(error);
         },
         registerPets: function(user, pets, sucess, error){
-            alert(JSON.stringify(user));
+            alert(JSON.stringify(pets));
             $http.post('/registerPets', user, pets).success(function(res){
                 success(user);
             }).error(error);
