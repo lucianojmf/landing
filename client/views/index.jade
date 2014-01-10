@@ -48,13 +48,8 @@ html(lang='en', data-ng-app='petiko')
                 strong {{ user.username }}&nbsp;
                 span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
         
-<<<<<<< HEAD
-    div(data-ng-view='ng-view')
-        .alert.alert-error(data-ng-bind="error", data-ng-show="error")
-=======
         div(data-ng-view='ng-view')
             .alert.alert-error(data-ng-bind="error", data-ng-show="error")
->>>>>>> b3d58f0bc9481c667d48e27a8a35830c7911dcbf
 
         script(src="http://code.jquery.com/jquery-1.10.1.min.js")
         script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js')
