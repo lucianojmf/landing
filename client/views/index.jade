@@ -6,6 +6,18 @@ html(lang='en', data-ng-app='petiko')
         link(rel='stylesheet', href='css/app.css')
         link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", rel="stylesheet")
         link(rel="icon" type="image/png" href='img/icon.png')
+
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(name="description" content="Petiko, a plataforma idealizada para quem ama animais de estimação")
+        meta(name="keywords" content="animais, pet, veterinario, jogos, quiz, quizzes, jogos pet, cachorro, gato, peixe, comida, ração")
+        meta(name="robots" content="index,follow")
+        meta(property="og:title" content="Petiko")
+        meta(property="og:type" content="Social")
+        meta(property="og:url" content="http://www.petiko.com.br")
+        meta(property="og:image" content="http://www.petiko.com.br/img/cover.jpg")
+        meta(property="og:site_name" content="PetiKo")
+        meta(property="og:description" content="Plataforma idealizada para quem ama animais de estimação")
+
         script(type="text/javascript").
             if (window.location.href.indexOf('#_=_') > 0) {
                 window.location = window.location.href.replace(/#.*/, '');
@@ -34,9 +46,10 @@ html(lang='en', data-ng-app='petiko')
                 strong {{ user.username }}&nbsp;
                 span.label(data-ng-class='{"label-info": user.role.title == userRoles.user.title, "label-success": user.role.title == userRoles.admin.title}') {{ user.role.title }}
         
-    div(data-ng-view='ng-view')
-        .alert.alert-error(data-ng-bind="error", data-ng-show="error")
+        div(data-ng-view='ng-view')
+            .alert.alert-error(data-ng-bind="error", data-ng-show="error")
 
+        script(src="http://code.jquery.com/jquery-1.10.1.min.js")
         script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js')
         script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js')
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js')
@@ -48,6 +61,8 @@ html(lang='en', data-ng-app='petiko')
         script(src='/js/controllers.js')
         script(src='/js/filters.js')
         script(src='/js/directives.js')
+
+        
 
         // Partial views... Load up front to make transitions smoother
         script(type="text/ng-template", id="404")
@@ -64,3 +79,6 @@ html(lang='en', data-ng-app='petiko')
             include partials/profile
         script(type="text/ng-template", id="register")
             include partials/register
+
+    footer
+        p PetiKo

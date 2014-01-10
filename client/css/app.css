@@ -50,26 +50,32 @@ h1, h2, h3, h4, h5, label, strong {
 .barAzul h1{
     color: #fff !important;
 }
+.barVerde{
+    margin-top: -5px;
+    height: 100px;
+    background: #9eab04;
+    padding: 20px;   
+}
+.barVerde h1{
+    color: #fff !important;
+}
 .thumbnail{
     border: none !important;
 }
+
+.cadastro{
+    background: #78acaa
+}
+
 
 #userInfo {
     float:right;padding:8px;
 }
 
-.icon-twitter {
-    color:#00A7E7;
+footer{
+    height: 200px;
+    background: #2c2c2c;
 }
-
-.icon-facebook-sign {
-    color:#3662A0;
-}
-
-.icon-google-plus-sign {
-    color: #D74634;
-}
-
 .fade-hide-setup, .fade-show-setup {
     -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
     -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
