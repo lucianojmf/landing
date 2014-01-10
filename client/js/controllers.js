@@ -68,15 +68,15 @@ angular.module('petiko')
     };
 }]);
 
-angular.module('petiko')
-.controller('UserCtrl',
-['$rootScope', '$scope', function($rootScope, $scope) {
-    $scope.list = [{}];
+// angular.module('petiko')
+// .controller('UserCtrl',
+// ['$rootScope', '$scope', function($rootScope, $scope) {
+//     $scope.list = [{}];
 
-    $scope.petRegister = function() {
+//     $scope.petRegister = function() {
         
-    };
-}]);
+//     };
+// }]);
 
 angular.module('petiko')
 .controller('ProfileCtrl',
