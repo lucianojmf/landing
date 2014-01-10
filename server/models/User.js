@@ -73,7 +73,7 @@ module.exports = {
 
         user.pets: pets
 
-        user.update(function(err){
+        user.save(function(err){
             if(err)
                 callback("ErrorSavingPets");
 
