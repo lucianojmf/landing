@@ -80,7 +80,7 @@ module.exports = {
             }else if(doc){
                 return false;
             }else{
-                var user = new User({
+                var user = new module.exports.User({
                     username: profile.emails[0].value,
                     role: userRoles.user,
                     providerId: profile.id,
