@@ -62,6 +62,7 @@ UserProfileSchema.methods.newPet = function(petObj, callback){
 };
 
 
+
 //------- Exporta as funções --------------------------------------
 module.exports = {
     //Exporta o modelo
@@ -72,6 +73,22 @@ module.exports = {
         var profile = new module.exports.UserProfile({
             user: user,
             petikets : 25
+        });
+        profile.save(function(err){
+            console.log(err);
+            if(err)
+              return callback("ErrorCreatingProfile");
+        });
+        callback(null, profile);
+    },
+    addProfileSocial:  function(profileSocial, user, callback) {
+        var profile = new module.exports.UserProfile({
+            user: user,
+            petikets : 25,
+            name:{
+                first: profileSocial.givenName,
+                last: profileSocial.familyName
+            }
         });
         profile.save(function(err){
             console.log(err);

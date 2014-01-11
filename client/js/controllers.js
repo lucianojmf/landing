@@ -67,6 +67,10 @@ angular.module('petiko')
                 $rootScope.error = err;
             });
     };
+    
+    $scope.loginOauth = function(provider) {
+        $window.location.href = '/auth/' + provider;
+    };
 }]);
 
 angular.module('petiko')

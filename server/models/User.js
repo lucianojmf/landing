@@ -18,6 +18,7 @@ var UserSchema = new mongoose.Schema({
     createdAt : { type: Date, default: Date.now },
     username: { type: String,  required: true,  index: { unique: true }},
     password: { type: String },
+    provider: { type: String },
     providerId: {type: String},
     role:   {
         bitMask: {type: Number},
@@ -72,22 +73,32 @@ module.exports = {
         });
     },
 
-    findOrCreateOauthUser: function(provider, providerId) {
-        User.findOne({provider: providerId}, function(err, doc){
+    findOrCreateOauthUser: function(provider, profile) {
+        module.exports.User.findOne({providerId: profile.id}, function(err, doc){
             if(err){
                 return false;
             }else if(doc){
                 return false;
             }else{
                 var user = new User({
-                    username: provider + '_user',
+                    username: profile.emails[0].value,
                     role: userRoles.user,
-                    provider: providerId
+                    providerId: profile.id,
+                    provider: provider
                 });
 
                 user.save(function(err){
                     if(err)
                         return false;
+                    else{
+                        //cria perfil do novo usuário
+                        UserProfile.addProfileSocial(user, profileSocial, function(err, profile){
+                            if(err)
+                                console.log('error creating profile social ' + err);
+                            user.profile = profile;
+                            user.save();
+                        });
+                    }
                 });
                 return user;
             }
@@ -127,7 +138,7 @@ module.exports = {
             callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8000/auth/twitter/callback'
         },
         function(token, tokenSecret, profile, done) {
-            var user = module.exports.findOrCreateOauthUser(profile.provider, profile.id);
+            var user = module.exports.findOrCreateOauthUser(profile.provider, profile);
             done(null, user);
         });
     },
@@ -142,7 +153,7 @@ module.exports = {
             callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:8000/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            var user = module.exports.findOrCreateOauthUser(profile.provider, profile.id);
+            var user = module.exports.findOrCreateOauthUser(profile.provider, profile);
             done(null, user);
         });
     },
@@ -154,7 +165,7 @@ module.exports = {
             realm: process.env.GOOGLE_REALM || "http://localhost:8000/"
         },
         function(identifier, profile, done) {
-            var user = module.exports.findOrCreateOauthUser('google', identifier);
+            var user = module.exports.findOrCreateOauthUser('google', profile);
             done(null, user);
         });
     },
@@ -169,7 +180,7 @@ module.exports = {
             callbackURL: process.env.LINKED_IN_CALLBACK_URL || "http://localhost:8000/auth/linkedin/callback"
           },
            function(token, tokenSecret, profile, done) {
-            var user = module.exports.findOrCreateOauthUser('linkedin', profile.id);
+            var user = module.exports.findOrCreateOauthUser('linkedin', profile);
             done(null,user); 
           }
         );
