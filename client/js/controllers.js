@@ -93,7 +93,6 @@ angular.module('petiko')
 
 
     // ---- Metodos do profile
-
     $scope.updateMyProfile = function(){
         //promocional
         if(!$scope.profile.step1){
