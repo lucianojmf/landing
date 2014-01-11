@@ -36,12 +36,6 @@ angular.module('petiko', ['ngCookies', 'ngRoute'])
             controller:     'ProfileCtrl',
             access:         access.user
         });
-    $routeProvider.when('/private',
-        {
-            templateUrl:    'private',
-            controller:     'PrivateCtrl',
-            access:         access.user
-        });
     $routeProvider.when('/admin',
         {
             templateUrl:    'admin',

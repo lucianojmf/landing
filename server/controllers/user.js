@@ -4,23 +4,6 @@ var _ =           require('underscore')
     , userRoles = require('../../client/js/routingConfig').userRoles;
 
 module.exports = {
-    index: function(req, res) {
-        User.findAll(function(err, users){
-            if(err)
-                res.json('');
-            else{
-                _.each(users, function(user) {
-                    delete user.password;
-                    delete user.twitter;
-                    delete user.facebook;
-                    delete user.google;
-                    delete user.linkedin;
-                });
-
-                res.json(users);
-            }
-        });
-    },
     myprofile: function(req, res){
         var user = req.user;
         user.getProfile(function(err, profile){
@@ -41,6 +24,13 @@ module.exports = {
             myprofile.gender = profileUpdate.gender;
             myprofile.address.city = profileUpdate.address.city;
             myprofile.address.state = profileUpdate.address.state;
+
+            myprofile.pets = profileUpdate.pets;
+            myprofile.petikets = profileUpdate.petikets;
+            myprofile.step1 = profileUpdate.step1;
+            myprofile.step2 = profileUpdate.step2;
+            myprofile.step3 = profileUpdate.step3;
+
 
             myprofile.save();
 

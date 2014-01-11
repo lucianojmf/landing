@@ -1,13 +1,19 @@
 var mongoose = require('mongoose')
 	,Schema = mongoose.Schema;
 
+//SCHEMA - MODELO CONVITE
+var Convite = new mongoose.Schema({
+    createdAt : { type: Date, default: Date.now },
+    ingressos: Number
+});
+
 //SCHEMA - MODELO PET
 var Pet = new mongoose.Schema({
     createdAt : { type: Date, default: Date.now },
     nome: String ,
     tipo: String ,
     raca: String ,
-    sexo: Boolean,
+    sexo: String,
     nascim:  Date
 });
 
@@ -19,7 +25,7 @@ var UserProfileSchema = new mongoose.Schema({
         last: String
     },
     birthday: Date,
-    gender: Boolean, //TRUE = MASCULINO, FALSE=FEMINO
+    gender: String,
     avatar: {type: String, default: 'default-avatar.png' },
     bio: String,
     address:{
@@ -33,7 +39,11 @@ var UserProfileSchema = new mongoose.Schema({
     	geoLoc:{type: [Number], index: '2d'}
     },
     pets: [Pet],   //Pets do usuário
-    petikets: Number
+    petikets: Number,
+    step1: {type: Boolean, default: false }, // PASSOS PROMOCIONAIS DA LANDING
+    step2: {type: Boolean, default: false },
+    step3: {type: Boolean, default: false }
+
 
 });
 

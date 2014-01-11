@@ -94,35 +94,6 @@ module.exports = {
         });
     },
 
-    // findAll: function(callback) {
-    //     User.find({}, function(err, users){
-    //         if(err){
-    //             callback(err, null);
-    //         }
-    //         else{
-    //             callback(null, users);
-    //         }
-    //     });
-    // },
-
-    // findById: function(id) {
-    //     User.findOne({_id: id}, function(err, user){
-    //         if(err)
-    //             console.log(err);
-    //         else
-    //             return user;
-    //     });
-    // },
-
-    // findByUsername: function(username) {
-    //     User.findOne({username: username}, function(err, user){
-    //         if(err)
-    //             console.log(err);
-    //         else
-    //             return user;
-    //     });
-    // },
-
     validate: function(user) {
         check(user.username, 'Username must be an Email').isEmail();
     },

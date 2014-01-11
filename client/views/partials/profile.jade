@@ -4,10 +4,12 @@
 			h3 Bem vindo ao PetiKo
 			p Obrigado por acreditar no PetiKo. A plataforma está em desenvolvimento, mas você já começa ganhando antes mesmo do lançamento oficial.
 			p Por ter feito seu pré cadastro, você já foi contemplado com Pk$ 25,00, nossa moeda virtual.
-			p Quer ganhar mais? Complete os passos abaixo e já fique mais próximo dos prêmios para seu animalzinho.
+			p Quer ganhar mais? Complete os passos abaixo e fique mais próximo dos prêmios para seu animalzinho.
 		.col-sm-3.col-md-3.col-lg-3
-			h4 Meus PetiKets:
-			strong.text-center PKs 25,00
+			h4.text-center Meus PetiKets
+			br
+			img.center-block(src='/img/coin.png')
+			h3.text-center PKs {{profile.petikets}}
 
 	.row
 		.col-sm-9.col-md-9.col-lg-9
@@ -16,31 +18,34 @@
 					.panel-heading
 						h4.panel-title
 							a(data-toggle="collapse" data-parent="#accordion" href="#perfil")
-								|Completar o perfil
+								|Completar o perfil  
+								span(ng-hide='profile.step1').label.label-primary.pull-right Incompleto
+								span(ng-show='profile.step1').label.label-default.pull-right Completo
 
 					#perfil.panel-collapse.collapse
 						.panel-body
 							form(role='form', ng-submit="updateMyProfile()")
+								p.lead.text-success.text-center Ganhe +5 petikets completando suas informações de perfil
 								.form-group
 									label(for="firstName") Sobre você
 									.row
 										.col-sm-4
-											input(type="text" class="form-control" id="firstName" placeholder="Nome" ng-model="profile.name.first" )
+											input.form-control(type="text" id="firstName" placeholder="Nome" ng-model="profile.name.first" required )
 										.col-sm-4
-											input(type="text" class="form-control" id="lastName" placeholder="Sobrenome" ng-model="profile.name.last")
+											input.form-control(type="text" id="lastName" placeholder="Sobrenome" ng-model="profile.name.last")
+										//- .col-sm-2
+										//- 	input.form-control(type="text" id="birthday" placeholder="Nascimento" ng-model="profile.birthday")
 										.col-sm-2
-											input(type="text" class="form-control" id="birthday" placeholder="Nascimento" ng-model="profile.birthday")
-										.col-sm-2
-											input(type="text" class="form-control" id="gender" placeholder="Sexo" ng-model="profile.gender")
+											select.form-control(id="gender" ng-model="profile.gender" ng-options="s for s in sexo" required)
 
 									br
 
 									label(for="city") De onde é?
 									.row
 										.col-sm-4
-											input(type="text" class="form-control" id="city" placeholder="Cidade" ng-model="profile.address.city")
+											input(type="text" class="form-control" id="city" placeholder="Cidade" ng-model="profile.address.city" required)
 										.col-sm-2
-											input(type="text" class="form-control" id="uf" placeholder="Estado" ng-model="profile.address.state")
+											input(type="text" class="form-control" id="uf" placeholder="Estado" ng-model="profile.address.state" required)
 									button.btn.btn-success.btn-lg.pull-right(type='submit')
 										span.glyphicon.glyphicon-ok  Atualizar
 
@@ -49,34 +54,51 @@
 						h4.panel-title
 							a(data-toggle="collapse" data-parent="#accordion" href="#pet")
 								|Meus Pets
-
+								span(ng-hide='profile.step2').label.label-primary.pull-right Incompleto
+								span(ng-show='profile.step2').label.label-default.pull-right Completo
 					#pet.panel-collapse.collapse
 						.panel-body
-							form(role='form')
+							form(role='form', ng-submit="addPet()")
+								p.lead.text-success.text-center Ganhe +5 petikets cadastrando pelo menos um de seus pet's
 								.form-group
 									label(for="firstName") Sobre seu Pet
 									.row
 										.col-sm-4
-											input(type="text" class="form-control" id="petName" placeholder="Nome")
-										.col-sm-4
-											input(type="text" class="form-control" id="petType")
+											input.form-control(type="text" id="petName" placeholder="Nome" ng-model="petObj.nome" required)
 										.col-sm-2
-											input(type="text" class="form-control" id="petBirthday" placeholder="Nascimento")
+											select.form-control(id="petType" ng-model="petObj.tipo" ng-options="t for t in tipoPet" required)
 										.col-sm-2
-											input(type="text" class="form-control" id="petGender" placeholder="Sexo")
-									.row
-									button.btn.btn-success.btn-lg.pull-right(type='submit')
-										span.glyphicon.glyphicon-ok  Atualizar
+											input.form-control(type="text" id="petRaca" placeholder="Raça" ng-model="petObj.raca" required)
+										.col-sm-2
+											select.form-control(id="petGender" ng-model="petObj.sexo" ng-options="s for s in sexo")
+										.col-sm-2
+											button.btn.btn-success(type='submit')
+												span.glyphicon.glyphicon-plus
+							table.table.table-striped(ng-hide="!profile.pets.length")
+								thead
+									tr
+										th Nome
+										th Raça
+										th Sexo
+								tbody
+									tr(data-ng-repeat="pet in profile.pets")
+										td {{pet.nome}}
+										td {{pet.raca}}
+										td {{pet.sexo}}
 
 				.panel.panel-default
 					.panel-heading
 						h4.panel-title
 							a(data-toggle="collapse" data-parent="#accordion" href="#convidar")
 								|Convidar amigos
+								span(ng-hide='profile.step3').label.label-primary.pull-right Incompleto
+								span(ng-show='profile.step3').label.label-default.pull-right Completo
 
 					#convidar.panel-collapse.collapse
 						.panel-body
 							form(role='form')
+								p.lead.text-success.text-center Ganhe +1 petiket para cada amigo que se cadastrar usando seu convite
+								p.lead.text-muted Aguarde, em desenvolvimento....
 								.form-group
 									label(for="firstName") Convide seus amigos
 									.row

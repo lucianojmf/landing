@@ -72,6 +72,9 @@ h1, h2, h3, h4, h5{
     background: #78acaa
 }
 
+.label {
+    padding: .5em .5em .5em !important;
+}
 
 #userInfo {
     float:right;padding:8px;

@@ -42,12 +42,6 @@ angular.module('petiko')
             else if(user.role.title == userRoles.business.title)
                 return '/business';
         },
-        // registerPets: function(user, pets, sucess, error){
-        //     alert(JSON.stringify(pets));
-        //     $http.post('/registerPets', user, pets).success(function(res){
-        //         success(data.user);
-        //     }).error(error);
-        // },
         login: function(user, success, error) {
             $http.post('/login', user).success(function(user){
                 changeUser(user);
@@ -83,6 +77,6 @@ angular.module('petiko')
         },
         updateMyProfile: function(profile, success, error){
             $http.put('/myprofile', profile).success(success).error(error);
-        },
+        }
     };
 });

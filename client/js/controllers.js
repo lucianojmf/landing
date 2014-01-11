@@ -83,13 +83,25 @@ angular.module('petiko')
     }, function(err) {
         $rootScope.error = err;
     });
-
+    $scope.sexo = ['M', 'F'];
+    $scope.tipoPet =['Cachorro', 'Gato', 'Ave', 'Peixe', 'Roedor', 'Réptil', 'Outro'];
     
+    $scope.petObj = {
+        nome: '',
+        tipo: $scope.tipoPet[0],
+        raca: '',
+        sexo: $scope.sexo[0]};
 
 
     // ---- Metodos do profile
 
     $scope.updateMyProfile = function(){
+        //promocional
+        if(!$scope.profile.step1){
+            $scope.profile.step1 = true;
+            $scope.profile.petikets = $scope.profile.petikets + 5;
+        }
+
         Users.updateMyProfile($scope.profile,
             function(res){
                 $scope.profile = res;
@@ -98,57 +110,32 @@ angular.module('petiko')
         });
     }
 
-
     // ---- Metodos dos pets
     $scope.addPet = function(){
-        
+        //promocional
+        if(!$scope.profile.step2){
+            $scope.profile.step2 = true;
+             $scope.profile.petikets = $scope.profile.petikets + 5;
+        }
+
+        $scope.profile.pets.push($scope.petObj);
+        Users.updateMyProfile($scope.profile,
+            function(res){
+                $scope.profile = res;
+        }, function(err){
+            $rootScope.error = err;
+        });
+        //resseta o form
+        $scope.petObj = {
+            nome: '',
+            tipo: $scope.tipoPet[0],
+            raca: '',
+            sexo: $scope.sexo[0]};
     }
 
-    $scope.listPets = {
-        options: [$scope.user.pets],
-        option_new: {nomePet: '', tipoPet: '', racaPet: '', nascimentoPet: ''}
-    };
-
-    $scope.addPet = function(){
-        
-    }
-
-    $scope.add = function() {
-        // add the new option to the model
-        $scope.listPets.options.push($scope.listPets.option_new);
-        
-        // clear the option.
-        $scope.listPets.option_new = {nomePet: '', tipoPet: '', racaPet: '', nascimentoPet: ''};
-    }
-
-    $scope.registerPets = function() {
-        // alert($scope.listPets.options);
-
-        // Auth.registerPets(
-        
-        // user: $scope.user,
-        
-        // pets: $scope.listPets.options,
-
-        // function(){
-        //     $location.path('/profile');
-        // },
-        // function(err) {
-        //     $rootScope.error = err;
-        // });
-    }
-
-    $scope.delete = function(idx){
-        $scope.listPets.options.splice(idx,1);
-    }
+    
     
 }]);
-
-angular.module('petiko')
-.controller('PrivateCtrl',
-['$rootScope', function($rootScope) {
-}]);
-
 
 angular.module('petiko')
 .controller('AdminCtrl',
