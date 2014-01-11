@@ -79,7 +79,6 @@ angular.module('petiko')
 
     Users.getMyProfile(function(res) {
         $scope.profile = res;
-        console.log($scope.profile);
     }, function(err) {
         $rootScope.error = err;
     });
