@@ -6,11 +6,17 @@ angular.module('petiko', ['ngCookies', 'ngRoute'])
 
     var access = routingConfig.accessLevels;
 
+    // $routeProvider.when('/',
+    //     {
+    //         templateUrl:    'home',
+    //         controller:     'HomeCtrl',
+    //         access:         access.user
+    //     });
     $routeProvider.when('/',
         {
-            templateUrl:    'home',
-            controller:     'HomeCtrl',
-            access:         access.user
+            templateUrl:    'register',
+            controller:     'RegisterCtrl',
+            access:         access.anon
         });
     $routeProvider.when('/login',
         {
@@ -72,7 +78,8 @@ angular.module('petiko', ['ngCookies', 'ngRoute'])
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
             if (!Auth.authorize(next.access)) {
-                if(Auth.isLoggedIn()) $location.path('/');
+                //if(Auth.isLoggedIn()) $location.path('/');
+                if(Auth.isLoggedIn()) $location.path(Auth.verifyLogin());
                 else                  $location.path('/register');
             }
         });

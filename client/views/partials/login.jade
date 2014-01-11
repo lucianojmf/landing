@@ -4,6 +4,7 @@
         .col-sm-6.col-md-6.col-lg-6
             br
             form(ng-submit="login()", name="loginForm").well
+
                 .form-group
                     label(for="username") Email
                     input.form-control(type="text", data-ng-model="username", placeholder="Email", name="username", required, autofocus)
@@ -21,7 +22,7 @@
 
         .col-sm-6.col-md-6.col-lg-6
             br
-            h4 Ou, se usou sua rede social
+            h4 Ou use sua rede social
             .col-sm-3.col-md-3.col-lg-3.col-
                 a.center-block(href="", data-ng-click="loginOauth('facebook')", title="Facebook")
                     img(src='/img/facebook.png')

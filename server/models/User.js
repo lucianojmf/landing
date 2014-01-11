@@ -8,77 +8,69 @@ var
     , check =           require('validator').check
     , crypto = require('crypto')
     , mongoose = require('mongoose')
-    , userRoles =       require('../../client/js/routingConfig').userRoles;
+    , UserProfile = require('../models/UserProfile.js')
+    , userRoles =       require('../../client/js/routingConfig').userRoles
+    , Schema = mongoose.Schema;
 
-var PetSchema = new mongoose.Schema({
-    nomePet: { type: String },
-    tipoPet: { type: String },
-    racaPet: { type: String },
-    nascimentoPet: { type: Date }
-});
 
-var Pet = mongoose.model('Pet', PetSchema);
 
-// Modelo de conta --------------------------------------------------
 var UserSchema = new mongoose.Schema({
     createdAt : { type: Date, default: Date.now },
     username: { type: String,  required: true,  index: { unique: true }},
     password: { type: String },
-    providerId: { type: String}, // para redes sociais Oauth
-    
+    providerId: {type: String},
     role:   {
         bitMask: {type: Number},
         title: {type:String}
     },
-
-    name: {
-        first: { type: String,  index: { unique: false }},
-        last: { type: String,  index: { unique: false }}
-    },
-
-    pets: [Pet]
+    profile: {type : Schema.ObjectId, index: { unique: true }}
     
-    // birthday: {
-    //     day: {type: Number, min:1, max:31, required: false},
-    //     month: {type: Number, min:1, max:12, required: false},
-    //     year: {type: Number}
-    // },
-    //photoUrl: { type: String},
-    //biography: { type: String},
 });
-var User = mongoose.model('User', UserSchema);
+
+// Método getProfile
+UserSchema.methods.getProfile = function(callback){
+    //Se for usuário recupera perfil de usuario
+    if(this.role.bitMask === userRoles.user.bitMask)
+        return this.db.model('UserProfile').findOne({user: this}, callback);
+    if(this.role.bitMask === userRoles.business.bitMask)
+        return this.db.model('BusinessProfile').findOne({user: this}, callback);
+};
+
+mongoose.model('User', UserSchema);
+
 
 module.exports = {
+    User: mongoose.model('User'),
+
     addUser: function(username, password, role, callback) {
         var shaSum = crypto.createHash('sha256');
         shaSum.update(password);
-        var user = new User({
+
+        var user = new module.exports.User({
             username: username,
             password: shaSum.digest('hex'),
-            role: {bitMask:role.bitMask, title: role.title}
+            role: role
         });
         user.save(function(err){
             if(err)
-                callback("UserAlreadyExists");
+              return callback("UserAlreadyExists");
+            else{
+                //cria perfil do novo usuário
+                UserProfile.addProfile(user, function(err, profile){
+                    if(err)
+                        console.log('error creating profile ' + err);
+                    user.profile = profile;
+                    user.save(function(err){
+                        if(err)
+                            return callback("errorProfile");
 
-            callback(null, user);
+                        callback(null, user);
+                    });
+
+                });
+            }
         });
     },
-
-    // addPets: function(user, pets){
-    //     console.log('Registering ' + user.username + 'pets ');
-
-    //     var user = findByUsername(user.username);
-
-    //     user.pets = pets;
-
-    //     user.save(function(err){
-    //         if(err)
-    //             callback("ErrorSavingPets");
-
-    //         callback(null, user);
-    //     });
-    // },
 
     findOrCreateOauthUser: function(provider, providerId) {
         User.findOne({provider: providerId}, function(err, doc){
@@ -102,34 +94,34 @@ module.exports = {
         });
     },
 
-    findAll: function(callback) {
-        User.find({}, function(err, users){
-            if(err){
-                callback(err, null);
-            }
-            else{
-                callback(null, users);
-            }
-        });
-    },
+    // findAll: function(callback) {
+    //     User.find({}, function(err, users){
+    //         if(err){
+    //             callback(err, null);
+    //         }
+    //         else{
+    //             callback(null, users);
+    //         }
+    //     });
+    // },
 
-    findById: function(id) {
-        User.findOne({_id: id}, function(err, user){
-            if(err)
-                console.log(err);
-            else
-                return user;
-        });
-    },
+    // findById: function(id) {
+    //     User.findOne({_id: id}, function(err, user){
+    //         if(err)
+    //             console.log(err);
+    //         else
+    //             return user;
+    //     });
+    // },
 
-    findByUsername: function(username) {
-        User.findOne({username: username}, function(err, user){
-            if(err)
-                console.log(err);
-            else
-                return user;
-        });
-    },
+    // findByUsername: function(username) {
+    //     User.findOne({username: username}, function(err, user){
+    //         if(err)
+    //             console.log(err);
+    //         else
+    //             return user;
+    //     });
+    // },
 
     validate: function(user) {
         check(user.username, 'Username must be an Email').isEmail();
@@ -139,7 +131,7 @@ module.exports = {
         function(username, password, done) {
             var shaSum = crypto.createHash('sha256');
             shaSum.update(password);
-            User.findOne({username: username, password: shaSum.digest('hex')}, function(err, doc){
+            module.exports.User.findOne({username: username, password: shaSum.digest('hex')}, function(err, doc){
                 if(err){
                     done(null, false, {message: 'Error on search.'})
                 }
@@ -216,9 +208,16 @@ module.exports = {
     },
 
     deserializeUser: function(id, done) {
-        var user = module.exports.findById(id);
+        module.exports.User.findById(id, function(err, user){
+            if(err){
+                console.log('error deserializer user ' + err);
+                done(null, false);      
+            }else if(user){
+                done(null, user);
+            }else{
+                done(null, false); 
+            }
+        });
 
-        if(user)    { done(null, user); }
-        else        { done(null, false); }
     }
 };

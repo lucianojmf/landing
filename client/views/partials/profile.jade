@@ -1,5 +1,90 @@
 .container
-    h3 Bem vindo ao PetiKo
+	.row
+		.col-sm-9.col-md-9.col-lg-9
+			h3 Bem vindo ao PetiKo
+			p Obrigado por acreditar no PetiKo. A plataforma está em desenvolvimento, mas você já começa ganhando antes mesmo do lançamento oficial.
+			p Por ter feito seu pré cadastro, você já foi contemplado com Pk$ 25,00, nossa moeda virtual.
+			p Quer ganhar mais? Complete os passos abaixo e já fique mais próximo dos prêmios para seu animalzinho.
+		.col-sm-3.col-md-3.col-lg-3
+			h4 Meus PetiKets:
+			strong.text-center PKs 25,00
 
-    h4 Seu saldo atual é:
-    h1.text-center PKs 15,00
+	.row
+		.col-sm-9.col-md-9.col-lg-9
+			#acordion.panel-group
+				.panel.panel-default
+					.panel-heading
+						h4.panel-title
+							a(data-toggle="collapse" data-parent="#accordion" href="#perfil")
+								|Completar o perfil
+
+					#perfil.panel-collapse.collapse
+						.panel-body
+							form(role='form', ng-submit="updateMyProfile()")
+								.form-group
+									label(for="firstName") Sobre você
+									.row
+										.col-sm-4
+											input(type="text" class="form-control" id="firstName" placeholder="Nome" ng-model="profile.name.first" )
+										.col-sm-4
+											input(type="text" class="form-control" id="lastName" placeholder="Sobrenome" ng-model="profile.name.last")
+										.col-sm-2
+											input(type="text" class="form-control" id="birthday" placeholder="Nascimento" ng-model="profile.birthday")
+										.col-sm-2
+											input(type="text" class="form-control" id="gender" placeholder="Sexo" ng-model="profile.gender")
+
+									br
+
+									label(for="city") De onde é?
+									.row
+										.col-sm-4
+											input(type="text" class="form-control" id="city" placeholder="Cidade" ng-model="profile.address.city")
+										.col-sm-2
+											input(type="text" class="form-control" id="uf" placeholder="Estado" ng-model="profile.address.state")
+									button.btn.btn-success.btn-lg.pull-right(type='submit')
+										span.glyphicon.glyphicon-ok  Atualizar
+
+				.panel.panel-default
+					.panel-heading
+						h4.panel-title
+							a(data-toggle="collapse" data-parent="#accordion" href="#pet")
+								|Meus Pets
+
+					#pet.panel-collapse.collapse
+						.panel-body
+							form(role='form')
+								.form-group
+									label(for="firstName") Sobre seu Pet
+									.row
+										.col-sm-4
+											input(type="text" class="form-control" id="petName" placeholder="Nome")
+										.col-sm-4
+											input(type="text" class="form-control" id="petType")
+										.col-sm-2
+											input(type="text" class="form-control" id="petBirthday" placeholder="Nascimento")
+										.col-sm-2
+											input(type="text" class="form-control" id="petGender" placeholder="Sexo")
+									.row
+									button.btn.btn-success.btn-lg.pull-right(type='submit')
+										span.glyphicon.glyphicon-ok  Atualizar
+
+				.panel.panel-default
+					.panel-heading
+						h4.panel-title
+							a(data-toggle="collapse" data-parent="#accordion" href="#convidar")
+								|Convidar amigos
+
+					#convidar.panel-collapse.collapse
+						.panel-body
+							form(role='form')
+								.form-group
+									label(for="firstName") Convide seus amigos
+									.row
+										.col-sm-4
+											input(type="text" class="form-control" id="link" placeholder="link")
+										.col-sm-4
+											
+										
+
+
+		.col-sm-3.col-md-3.col-lg-3

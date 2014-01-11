@@ -40,8 +40,8 @@ app.use(passport.session());
 
 passport.use(models.User.localStrategy);
 //passport.use(models.User.twitterStrategy());  // Comment out this line if you don't want to enable login via Twitter
-passport.use(models.User.facebookStrategy()); // Comment out this line if you don't want to enable login via Facebook
-passport.use(models.User.googleStrategy());   // Comment out this line if you don't want to enable login via Google
+//passport.use(models.User.facebookStrategy()); // Comment out this line if you don't want to enable login via Facebook
+//passport.use(models.User.googleStrategy());   // Comment out this line if you don't want to enable login via Google
 //passport.use(models.User.linkedInStrategy()); // Comment out this line if you don't want to enable login via LinkedIn
 
 passport.serializeUser(models.User.serializeUser);

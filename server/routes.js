@@ -89,6 +89,22 @@ var routes = [
         httpMethod: 'POST',
         middleware: [AuthCtrl.logout]
     },
+    //PROFILE ACTIONS -------------------------------
+    { //GET PROFILE
+        path: '/myprofile',
+        httpMethod: 'GET',
+        middleware: [UserCtrl.myprofile],
+        accessLevel: accessLevels.user
+    },
+
+    { //UPDATE PROFILE
+        path: '/myprofile',
+        httpMethod: 'PUT',
+        middleware: [UserCtrl.myprofileEdit],
+        accessLevel: accessLevels.user
+    },
+    
+
 
     // User resource
     {
@@ -103,14 +119,16 @@ var routes = [
         path: '/*',
         httpMethod: 'GET',
         middleware: [function(req, res) {
-            var role = userRoles.public, username = '';
+            var role = userRoles.public, username = '', profile='';
             if(req.user) {
                 role = req.user.role;
                 username = req.user.username;
+                profile = req.user.profile;
             }
             res.cookie('user', JSON.stringify({
                 'username': username,
-                'role': role
+                'role': role,
+                'profile': profile,
             }));
             res.render('index');
         }]
@@ -145,7 +163,6 @@ module.exports = function(app) {
 
 function ensureAuthorized(req, res, next) {
     var role;
-
     if(!req.user) role = userRoles.public;
     else          role = req.user.role;
 

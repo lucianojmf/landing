@@ -30,11 +30,7 @@ angular.module('petiko')
                 rememberme: $scope.rememberme
             },
             function(res) {
-                //se for usuario, redireciona para o perfil
-                if(res.role.bitMask == $scope.userRole.bitMask)
-                    $location.path('/profile');                    
-                else
-                    $location.path('/');
+                $location.path(Auth.verifyLogin());
             },
             function(err) {
                 $rootScope.error = "Failed to login";
@@ -65,7 +61,7 @@ angular.module('petiko')
                 role: $scope.userRoles.user
             },
             function() {
-                $location.path('/profile');
+                $location.path(Auth.verifyLogin());
             },
             function(err) {
                 $rootScope.error = err;
@@ -75,8 +71,39 @@ angular.module('petiko')
 
 angular.module('petiko')
 .controller('ProfileCtrl',
-['$rootScope', '$scope', 'Auth', '$location', function($rootScope, $scope, Auth, $location) {
+['$rootScope', '$scope', 'Auth', 'Users', '$location', function($rootScope, $scope, Auth, Users,  $location) {
+    //Objetos
     $scope.user = Auth.user;
+    $scope.userRoles = Auth.userRoles;
+    $scope.accessLevels = Auth.accessLevels;
+
+    Users.getMyProfile(function(res) {
+        $scope.profile = res;
+        console.log($scope.profile);
+    }, function(err) {
+        $rootScope.error = err;
+    });
+
+    
+
+
+    // ---- Metodos do profile
+
+    $scope.updateMyProfile = function(){
+        Users.updateMyProfile($scope.profile,
+            function(res){
+                $scope.profile = res;
+        }, function(err){
+            $rootScope.error = err;
+        });
+    }
+
+
+    // ---- Metodos dos pets
+    $scope.addPet = function(){
+        
+    }
+
     $scope.listPets = {
         options: [$scope.user.pets],
         option_new: {nomePet: '', tipoPet: '', racaPet: '', nascimentoPet: ''}

@@ -31,6 +31,17 @@ angular.module('petiko')
                 success();
             }).error(error);
         },
+        verifyLogin: function(user){
+            if(user === undefined)
+                user = currentUser;
+
+            if(user.role.title == userRoles.admin.title)
+                return '/admin';
+            else if(user.role.title == userRoles.user.title)
+                return '/profile';
+            else if(user.role.title == userRoles.business.title)
+                return '/business';
+        },
         // registerPets: function(user, pets, sucess, error){
         //     alert(JSON.stringify(pets));
         //     $http.post('/registerPets', user, pets).success(function(res){
@@ -59,10 +70,19 @@ angular.module('petiko')
 });
 
 angular.module('petiko')
-.factory('Users', function($http) {
+.factory('Users', function($http, $cookieStore) {
+    var currentUser = $cookieStore.get('user');
     return {
         getAll: function(success, error) {
             $http.get('/users').success(success).error(error);
-        }
+        },
+
+
+        getMyProfile: function(success, error) {
+            $http.get('/myprofile', currentUser).success(success).error(error);
+        },
+        updateMyProfile: function(profile, success, error){
+            $http.put('/myprofile', profile).success(success).error(error);
+        },
     };
 });

@@ -1,5 +1,6 @@
 var _ =           require('underscore')
-    , User =      require('../models/User.js')
+    , User =      require('../models/User.js').User
+    , UserProfile =      require('../models/UserProfile.js').UserProfile
     , userRoles = require('../../client/js/routingConfig').userRoles;
 
 module.exports = {
@@ -18,6 +19,32 @@ module.exports = {
 
                 res.json(users);
             }
+        });
+    },
+    myprofile: function(req, res){
+        var user = req.user;
+        user.getProfile(function(err, profile){
+            if(err)
+                return res.send(400, err);
+            res.json(profile);
+        });
+    },
+    myprofileEdit: function(req, res){
+        var profileUpdate =  req.body;
+
+        UserProfile.findById(profileUpdate._id, function(err, myprofile){
+            if(err)
+                return res.send(400, err);
+
+            myprofile.name = profileUpdate.name;
+            myprofile.birthday = profileUpdate.birthday;
+            myprofile.gender = profileUpdate.gender;
+            myprofile.address.city = profileUpdate.address.city;
+            myprofile.address.state = profileUpdate.address.state;
+
+            myprofile.save();
+
+            res.json(myprofile);
         });
     }
 };
