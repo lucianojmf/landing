@@ -81,7 +81,7 @@ module.exports = {
                 callback(false, doc);
             }else{
                 var user = new module.exports.User({
-                    username: provider +'_'+ id,
+                    username: provider +'_'+ Date.now,
                     role: userRoles.user,
                     providerId: id,
                     provider: provider
