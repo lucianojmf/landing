@@ -88,8 +88,10 @@ module.exports = {
         var profile = new module.exports.UserProfile({
             user: user,
             petikets : 25,
-            name.first: 'nome',
-            name.last: 'sobrenome'
+            name:{
+                first: 'nome',
+                last: 'sobrenome'
+            }
         });
         profile.save(function(err){
             console.log(err);
