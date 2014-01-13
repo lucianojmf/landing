@@ -83,8 +83,7 @@ module.exports = {
     },
     addProfileSocial:  function(profileSocial, user, callback) {
         console.log('******** TENTA CRIAR O PERFIL');
-        console.log(profileSocial.givenName);
-        console.log(profileSocial.familyName);
+        console.log(profileSocial);
 
         var profile = new module.exports.UserProfile({
             user: user,
