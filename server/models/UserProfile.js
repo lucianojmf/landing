@@ -83,6 +83,9 @@ module.exports = {
     },
     addProfileSocial:  function(profileSocial, user, callback) {
         console.log('******** TENTA CRIAR O PERFIL');
+        console.log(profileSocial.givenName);
+        console.log(profileSocial.familyName);
+
         var profile = new module.exports.UserProfile({
             user: user,
             petikets : 25,
@@ -91,7 +94,6 @@ module.exports = {
                 last: profileSocial.familyName
             }
         });
-        console.log(profile);
         profile.save(function(err){
             console.log(err);
             if(err)
