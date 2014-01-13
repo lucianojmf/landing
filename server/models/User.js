@@ -73,14 +73,13 @@ module.exports = {
         });
     },
 
-    findOrCreateOauthUser: function(provider, profile) {
+    findOrCreateOauthUser: function(provider, profile, callback) {
         module.exports.User.findOne({providerId: profile.id}, function(err, doc){
             if(err){
+                callback(err, false);
                 return false;
             }else if(doc){
-                console.log('******** buscou');
-                console.log(doc);
-                return doc;
+                callback(false, doc);
             }else{
                 var user = new module.exports.User({
                     username: provider +'_user',
@@ -91,21 +90,20 @@ module.exports = {
 
                 user.save(function(err){
                     if(err)
-                        return false;
+                        callback(err, false);
                     else{
                         //cria perfil do novo usuário
                         UserProfile.addProfileSocial(profile, user, function(err, profile){
                             if(err)
                                 console.log('error creating profile social ' + err);
 
-                            console.log('******** RETORNOU DO PROFILE');
                             user.profile = profile;
                             user.save(function(err){
                                 if(err)
-                                    return false
+                                    callback(err, false);
 
-                                console.log('******** DEVOLVE O USER');
-                                console.log(user);
+
+                                callback(false, doc);
                                 return user;
                             });
                         });
@@ -163,10 +161,12 @@ module.exports = {
             callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:8000/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            var user = module.exports.findOrCreateOauthUser(profile.provider, profile);
-            console.log("******* FacebookStrategy USER");
-            console.log(user);
-            done(null, user);
+            var user = module.exports.findOrCreateOauthUser(profile.provider, profile, function(err, user){
+                if(err)
+                    done(err, null)
+
+                done(null, user);
+            });
         });
     },
 
