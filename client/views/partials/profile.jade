@@ -45,7 +45,7 @@
 										.col-sm-4
 											input(type="text" class="form-control" id="city" placeholder="Cidade" ng-model="profile.address.city" required)
 										.col-sm-2
-											input(type="text" class="form-control" id="uf" placeholder="Estado" ng-model="profile.address.state" required)
+											select.form-control(id="uf" ng-model="profile.address.state" ng-options="s for s in estados")
 									button.btn.btn-success.btn-lg.pull-right(type='submit')
 										span.glyphicon.glyphicon-ok  Atualizar
 

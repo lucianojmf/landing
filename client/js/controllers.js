@@ -88,7 +88,7 @@ angular.module('petiko')
     });
     $scope.sexo = ['M', 'F'];
     $scope.tipoPet =['Cachorro', 'Gato', 'Ave', 'Peixe', 'Roedor', 'Réptil', 'Outro'];
-    
+    $scope.estados = ["AC", "AL", "AM", "AP",  "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"];
     $scope.petObj = {
         nome: '',
         tipo: $scope.tipoPet[0],
