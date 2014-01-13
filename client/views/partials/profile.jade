@@ -25,7 +25,14 @@
 					#perfil.panel-collapse.collapse
 						.panel-body
 							form(role='form', ng-submit="updateMyProfile()")
-								p.lead.text-success.text-center Ganhe +5 petikets completando suas informações de perfil
+								div.alert.alert-info(ng-hide='profile.step1')
+									button.close(type="button" data-dismiss="alert" aria-hidden="true") &times;
+									strong Ganhe +5 : 
+									| Complete suas informações de perfil
+								div.alert.alert-success(ng-show='profile.step1')
+									button.close(type="button" data-dismiss="alert" aria-hidden="true") &times;
+									strong Completo! : 
+									| Você já ganhou PetiKets completando seu perfil
 								.form-group
 									label(for="firstName") Sobre você
 									.row
@@ -59,7 +66,14 @@
 					#pet.panel-collapse.collapse
 						.panel-body
 							form(role='form', ng-submit="addPet()")
-								p.lead.text-success.text-center Ganhe +5 petikets cadastrando pelo menos um de seus pet's
+								div.alert.alert-info(ng-hide='profile.step2')
+									button.close(type="button" data-dismiss="alert" aria-hidden="true") &times;
+									strong Ganhe +5 : 
+									| Cadastre pelo menos um pet
+								div.alert.alert-success(ng-show='profile.step2')
+									button.close(type="button" data-dismiss="alert" aria-hidden="true") &times;
+									strong Completo! : 
+									| Você já ganhou PetiKets cadastrando seu primeiro pet
 								.form-group
 									label(for="firstName") Sobre seu Pet
 									.row
@@ -97,7 +111,10 @@
 					#convidar.panel-collapse.collapse
 						.panel-body
 							form(role='form')
-								p.lead.text-success.text-center Ganhe +1 petiket para cada amigo que se cadastrar usando seu convite
+								div.alert.alert-info(ng-hide='profile.step3')
+									button.close(type="button" data-dismiss="alert" aria-hidden="true") &times;
+									strong Ganhe +1 : 
+									|  Para cada amigo que entrar no PetiKo utilizando seu convite
 								p.lead.text-muted Aguarde, em desenvolvimento....
 								.form-group
 									label(for="firstName") Convide seus amigos

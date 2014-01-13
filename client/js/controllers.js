@@ -83,6 +83,12 @@ angular.module('petiko')
 
     Users.getMyProfile(function(res) {
         $scope.profile = res;
+        if(!profile.step1){
+            $scope.msgStep1 = {
+                strong: 'Ganhe + 5: ',
+                body: ''
+            }
+        }
     }, function(err) {
         $rootScope.error = err;
     });
