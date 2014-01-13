@@ -103,7 +103,7 @@ module.exports = {
                                     callback(err, false);
 
 
-                                callback(false, doc);
+                                callback(false, user);
                             });
                         });
                     }
