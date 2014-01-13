@@ -78,6 +78,8 @@ module.exports = {
             if(err){
                 return false;
             }else if(doc){
+                console.log('******** buscou');
+                console.log(doc);
                 return doc;
             }else{
                 var user = new module.exports.User({
@@ -103,6 +105,7 @@ module.exports = {
                                     return false
 
                                 console.log('******** DEVOLVE O USER');
+                                console.log(user);
                                 return user;
                             });
                         });
