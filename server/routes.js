@@ -29,7 +29,7 @@ var routes = [
         path: '/auth/twitter/callback',
         httpMethod: 'GET',
         middleware: [passport.authenticate('twitter', {
-            successRedirect: '/',
+            successRedirect: '/profile',
             failureRedirect: '/login'
         })]
     },
@@ -42,7 +42,7 @@ var routes = [
         path: '/auth/facebook/callback',
         httpMethod: 'GET',
         middleware: [passport.authenticate('facebook', {
-            successRedirect: '/',
+            successRedirect: '/profile',
             failureRedirect: '/login'
         })]
     },
@@ -55,7 +55,7 @@ var routes = [
         path: '/auth/google/return',
         httpMethod: 'GET',
         middleware: [passport.authenticate('google', {
-            successRedirect: '/',
+            successRedirect: '/profile',
             failureRedirect: '/login'
         })]
     },
@@ -68,7 +68,7 @@ var routes = [
         path: '/auth/linkedin/callback',
         httpMethod: 'GET',
         middleware: [passport.authenticate('linkedin', {
-            successRedirect: '/',
+            successRedirect: '/profile',
             failureRedirect: '/login'
         })]
     },
