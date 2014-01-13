@@ -82,8 +82,6 @@ module.exports = {
         callback(null, profile);
     },
     addProfileSocial:  function(profileSocial, user, callback) {
-        console.log('******** TENTA CRIAR O PERFIL');
-
         var profile = new module.exports.UserProfile({
             user: user,
             petikets : 25,
@@ -97,7 +95,6 @@ module.exports = {
             if(err)
               return callback("ErrorCreatingProfile");
         });
-        console.log('******** EM TEORIA FOI!');
         callback(null, profile);
     }
 };

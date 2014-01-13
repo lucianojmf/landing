@@ -78,7 +78,7 @@ module.exports = {
             if(err){
                 return false;
             }else if(doc){
-                return false;
+                return doc;
             }else{
                 var user = new module.exports.User({
                     username: provider +'_user',
@@ -95,12 +95,19 @@ module.exports = {
                         UserProfile.addProfileSocial(profile, user, function(err, profile){
                             if(err)
                                 console.log('error creating profile social ' + err);
+
+                            console.log('******** RETORNOU DO PROFILE');
                             user.profile = profile;
-                            user.save();
+                            user.save(function(err){
+                                if(err)
+                                    return false
+
+                                console.log('******** DEVOLVE O USER');
+                                return user;
+                            });
                         });
                     }
                 });
-                return user;
             }
         });
     },
