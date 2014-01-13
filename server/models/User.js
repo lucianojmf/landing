@@ -77,7 +77,6 @@ module.exports = {
         module.exports.User.findOne({providerId: profile.id}, function(err, doc){
             if(err){
                 callback(err, false);
-                return false;
             }else if(doc){
                 callback(false, doc);
             }else{
@@ -104,7 +103,6 @@ module.exports = {
 
 
                                 callback(false, doc);
-                                return user;
                             });
                         });
                     }
