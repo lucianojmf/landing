@@ -73,17 +73,17 @@ module.exports = {
         });
     },
 
-    findOrCreateOauthUser: function(provider, profile, callback) {
-        module.exports.User.findOne({providerId: profile.id}, function(err, doc){
+    findOrCreateOauthUser: function(id, provider, profile, callback) {
+        module.exports.User.findOne({providerId: id}, function(err, doc){
             if(err){
                 callback(err, false);
             }else if(doc){
                 callback(false, doc);
             }else{
                 var user = new module.exports.User({
-                    username: provider +'_'+ profile.id,
+                    username: provider +'_'+ id,
                     role: userRoles.user,
-                    providerId: profile.id,
+                    providerId: id,
                     provider: provider
                 });
 
@@ -144,7 +144,7 @@ module.exports = {
             callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8000/auth/twitter/callback'
         },
         function(token, tokenSecret, profile, done) {
-            var user = module.exports.findOrCreateOauthUser(profile.provider, profile, function(err, user){
+            var user = module.exports.findOrCreateOauthUser(profile.id, profile.provider, profile, function(err, user){
                 if(err)
                     done(err, null)
 
@@ -163,7 +163,7 @@ module.exports = {
             callbackURL: process.env.FACEBOOK_CALLBACK_URL || "http://localhost:8000/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            var user = module.exports.findOrCreateOauthUser(profile.provider, profile, function(err, user){
+            var user = module.exports.findOrCreateOauthUser(profile.id, profile.provider, profile, function(err, user){
                 if(err)
                     done(err, null)
 
@@ -179,7 +179,7 @@ module.exports = {
             realm: process.env.GOOGLE_REALM || "http://localhost:8000/"
         },
         function(identifier, profile, done) {
-            var user = module.exports.findOrCreateOauthUser('google', profile, function(err, user){
+            var user = module.exports.findOrCreateOauthUser(identifier, 'google', profile, function(err, user){
                 if(err)
                     done(err, null)
 
@@ -198,7 +198,7 @@ module.exports = {
             callbackURL: process.env.LINKED_IN_CALLBACK_URL || "http://localhost:8000/auth/linkedin/callback"
           },
            function(token, tokenSecret, profile, done) {
-            var user = module.exports.findOrCreateOauthUser('linkedin', profile, function(err, user){
+            var user = module.exports.findOrCreateOauthUser(provider, 'linkedin', profile, function(err, user){
                 if(err)
                     done(err, null)
 
