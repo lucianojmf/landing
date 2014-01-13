@@ -74,15 +74,15 @@ module.exports = {
     },
 
     findOrCreateOauthUser: function(provider, profile) {
+        console.log(profile);
         module.exports.User.findOne({providerId: profile.id}, function(err, doc){
             if(err){
                 return false;
             }else if(doc){
                 return false;
             }else{
-
                 var user = new module.exports.User({
-                    username: profile.emails[0].value,
+                    username: provider +' _user',
                     role: userRoles.user,
                     providerId: profile.id,
                     provider: provider
@@ -92,6 +92,7 @@ module.exports = {
                     if(err)
                         return false;
                     else{
+                        console.log('******** CRIAR O PERFIL');
                         //cria perfil do novo usuário
                         UserProfile.addProfileSocial(user, profile, function(err, profile){
                             if(err)
