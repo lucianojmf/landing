@@ -50,7 +50,7 @@ angular.module('petiko')
 
 angular.module('petiko')
 .controller('RegisterCtrl',
-['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
+['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
     $scope.role = Auth.userRoles.user;
     $scope.userRoles = Auth.userRoles;
 
