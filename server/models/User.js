@@ -80,8 +80,9 @@ module.exports = {
             }else if(doc){
                 callback(false, doc);
             }else{
+                var now = new Date();
                 var user = new module.exports.User({
-                    username: provider +'_'+ Date.now,
+                    username: provider +'_'+ now,
                     role: userRoles.user,
                     providerId: id,
                     provider: provider
