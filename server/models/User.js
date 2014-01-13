@@ -82,7 +82,7 @@ module.exports = {
                 callback(false, doc);
             }else{
                 var user = new module.exports.User({
-                    username: provider +'_'+ providerId,
+                    username: provider +'_'+ profile.id,
                     role: userRoles.user,
                     providerId: profile.id,
                     provider: provider
