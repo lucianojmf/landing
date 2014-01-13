@@ -70,8 +70,12 @@
                         input.form-control(type="text", data-ng-model="username", placeholder="Email", name="username", required, autofocus)
                     .form-group
                         label(for="password") Senha
-                        input.form-control(type="password", data-ng-model="password", placeholder="Senha", name="password", required, data-ng-minlength="5", data-ng-maxlength="15")
+                        input.form-control(type="password", data-ng-model="password", placeholder="Senha (min. 5 digitos)", name="password", required, data-ng-minlength="5", data-ng-maxlength="15")
                     .form-group
                         button.btn.btn-success.btn-lg.btn-block(type="submit", data-ng-disabled="registerForm.$invalid") Cadastrar
 
 .footer
+    .container
+        div#fb-root
+        p.text-center © 2014 - PetiKo
+        div.fb-like-box.pull-right(data-href="https://www.facebook.com/PetikoPlataforma" data-width="292" data-height="250" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false")

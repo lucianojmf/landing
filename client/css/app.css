@@ -22,15 +22,6 @@
 .navbar-petiko{
     margin-bottom: 0px !important;
 }
-/*.navbar-header {
-    float: left;
-    padding: 15px;
-    text-align: center;
-    width: 100%;
-}
-.navbar-brand{
-    float:none !important;
-}*/
 h1, h2, h3, h4, h5{
     font-family: "Abstrec" !important;
 }
@@ -59,7 +50,7 @@ h1, h2, h3, h4, h5{
     margin-top: -5px;
     height: 100px;
     background: #9eab04;
-    padding: 20px;   
+    padding: 20px;
 }
 .barVerde h1{
     color: #fff !important;
@@ -69,7 +60,8 @@ h1, h2, h3, h4, h5{
 }
 
 .cadastro{
-    background: #78acaa
+    background: #78acaa;
+    padding-bottom: 50px;
 }
 
 .label {
@@ -80,9 +72,11 @@ h1, h2, h3, h4, h5{
     float:right;padding:8px;
 }
 
-footer{
-    height: 200px;
-    background: #2c2c2c;
+.footer{
+    padding: 40px;
+    color: #9eab04;
+    background: url('../img/footer.png') no-repeat left bottom; 
+    background-color: #2c2c2c;
 }
 .fade-hide-setup, .fade-show-setup {
     -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
