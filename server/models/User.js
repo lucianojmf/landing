@@ -80,6 +80,7 @@ module.exports = {
             }else if(doc){
                 return false;
             }else{
+
                 var user = new module.exports.User({
                     username: profile.emails[0].value,
                     role: userRoles.user,
@@ -92,7 +93,7 @@ module.exports = {
                         return false;
                     else{
                         //cria perfil do novo usuário
-                        UserProfile.addProfileSocial(user, profileSocial, function(err, profile){
+                        UserProfile.addProfileSocial(user, profile, function(err, profile){
                             if(err)
                                 console.log('error creating profile social ' + err);
                             user.profile = profile;
