@@ -83,14 +83,13 @@ module.exports = {
     },
     addProfileSocial:  function(profileSocial, user, callback) {
         console.log('******** TENTA CRIAR O PERFIL');
-        console.log(profileSocial);
 
         var profile = new module.exports.UserProfile({
             user: user,
             petikets : 25,
             name:{
-                first: 'nome',
-                last: 'sobrenome'
+                first: profileSocial.givenName,
+                last: profileSocial.familyName
             }
         });
         profile.save(function(err){
@@ -98,6 +97,7 @@ module.exports = {
             if(err)
               return callback("ErrorCreatingProfile");
         });
+        console.log('******** EM TEORIA FOI!');
         callback(null, profile);
     }
 };

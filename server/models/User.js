@@ -92,7 +92,7 @@ module.exports = {
                         return false;
                     else{
                         //cria perfil do novo usuário
-                        UserProfile.addProfileSocial(user, profile, function(err, profile){
+                        UserProfile.addProfileSocial(profile, user, function(err, profile){
                             if(err)
                                 console.log('error creating profile social ' + err);
                             user.profile = profile;
