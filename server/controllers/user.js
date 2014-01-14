@@ -23,7 +23,7 @@ module.exports = {
 
             myprofile.name = profileUpdate.name;
             if(dateSplitted){
-                myprofile.birthday = new Date(parseInt(dateSplitted[2]), parseInt(dateSplitted[1])-1, parseInt(dateSplitted[0]));
+                myprofile.birthday = new Date(parseInt(dateSplitted[2]), parseInt(dateSplitted[1])-1, parseInt(dateSplitted[0]), 3);
             }
             
             myprofile.gender = profileUpdate.gender;
