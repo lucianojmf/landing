@@ -74,6 +74,7 @@ module.exports = {
     },
 
     findOrCreateOauthUser: function(id, provider, profile, callback) {
+        console.log(profile);
         module.exports.User.findOne({providerId: id}, function(err, doc){
             if(err){
                 callback(err, false);
