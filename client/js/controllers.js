@@ -83,6 +83,29 @@ angular.module('petiko')
 
     Users.getMyProfile(function(res) {
         $scope.profile = res;
+
+        if($scope.profile){
+            if($scope.profile.birthday){
+                $scope.brt = new Date($scope.profile.birthday);
+                if($scope.brt.getMonth() + 1 < 10){
+                    if($scope.brt.getDate() < 10)
+                        $scope.cst = "0"+$scope.brt.getDate()+".0"+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                    else
+                        $scope.cst = $scope.brt.getDate()+".0"+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                }
+                else{
+                    if($scope.brt.getDate() < 10)
+                        $scope.cst = "0"+$scope.brt.getDate()+"."+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                    else
+                        $scope.cst = $scope.brt.getDate()+"."+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                }
+
+                $scope.profile.birthday = $scope.cst;
+                $scope.cst = null;
+                $scope.brt = null;
+            }
+        }
+
         if(!profile.step1){
             $scope.msgStep1 = {
                 strong: 'Ganhe + 5: ',
@@ -113,6 +136,29 @@ angular.module('petiko')
         Users.updateMyProfile($scope.profile,
             function(res){
                 $scope.profile = res;
+
+                if($scope.profile){
+                    if($scope.profile.birthday){
+                        $scope.brt = new Date($scope.profile.birthday);
+                        if($scope.brt.getMonth() + 1 < 10){
+                            if($scope.brt.getDate() < 10)
+                                $scope.cst = "0"+$scope.brt.getDate()+".0"+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                            else
+                                $scope.cst = $scope.brt.getDate()+".0"+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                        }
+                        else{
+                            if($scope.brt.getDate() < 10)
+                                $scope.cst = "0"+$scope.brt.getDate()+"."+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                            else
+                                $scope.cst = $scope.brt.getDate()+"."+($scope.brt.getMonth()+1)+"."+$scope.brt.getFullYear();
+                        }
+
+                        $scope.profile.birthday = $scope.cst;
+                        $scope.cst = null;
+                        $scope.brt = null;
+                    }
+                }
+
         }, function(err){
             $rootScope.error = err;
         });

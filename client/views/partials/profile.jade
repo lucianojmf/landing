@@ -40,8 +40,8 @@
 											input.form-control(type="text" id="firstName" placeholder="Nome" ng-model="profile.name.first" required )
 										.col-sm-4
 											input.form-control(type="text" id="lastName" placeholder="Sobrenome" ng-model="profile.name.last")
-										//- .col-sm-2
-										//- 	input.form-control(type="text" id="birthday" placeholder="Nascimento" ng-model="profile.birthday")
+										.col-sm-2
+											input.form-control(type="text" placeholder="Nascimento" ng-model="profile.birthday" id="birthday" readonly required)
 										.col-sm-2
 											select.form-control(id="gender" ng-model="profile.gender" ng-options="s for s in sexo" required)
 
@@ -127,3 +127,14 @@
 
 
 		.col-sm-3.col-md-3.col-lg-3
+
+	script(type="text/javascript").
+		$(document).ready(function(){
+			$('#birthday').datepicker({
+				format: "dd.mm.yyyy",
+				language: "pt-BR",
+				forceParse: false,
+				autoclose: true,
+				todayHighlight: true
+			});
+		});
