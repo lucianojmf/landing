@@ -15,12 +15,16 @@ module.exports = {
     myprofileEdit: function(req, res){
         var profileUpdate =  req.body;
 
+        var dateSplitted = profileUpdate.birthday.split(".");
+
         UserProfile.findById(profileUpdate._id, function(err, myprofile){
             if(err)
                 return res.send(400, err);
 
             myprofile.name = profileUpdate.name;
-            myprofile.birthday = profileUpdate.birthday;
+            if(dateSplitted)
+                myprofile.birthday = new Date(parseInt(dateSplitted[2]), parseInt(dateSplitted[1]), parseInt(dateSplitted[0]));
+            
             myprofile.gender = profileUpdate.gender;
             myprofile.address.city = profileUpdate.address.city;
             myprofile.address.state = profileUpdate.address.state;
