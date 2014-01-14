@@ -24,7 +24,7 @@
 
 					#perfil.panel-collapse.collapse
 						.panel-body
-							form(role='form', ng-submit="updateMyProfile()")
+							form(role='form', ng-submit="updateMyProfile()", name="profileForm")
 								div.alert.alert-info(ng-hide='profile.step1')
 									button.close(type="button" data-dismiss="alert" aria-hidden="true") &times;
 									strong Ganhe +5 : 
@@ -34,7 +34,7 @@
 									strong Completo! : 
 									| Você já ganhou PetiKets completando seu perfil
 								.form-group
-									label(for="firstName") Sobre você
+									label Sobre você
 									.row
 										.col-sm-4
 											input.form-control(type="text" id="firstName" placeholder="Nome" ng-model="profile.name.first" required )
@@ -52,8 +52,8 @@
 										.col-sm-4
 											input(type="text" class="form-control" id="city" placeholder="Cidade" ng-model="profile.address.city" required)
 										.col-sm-2
-											select.form-control(id="uf" ng-model="profile.address.state" ng-options="s for s in estados")
-									button.btn.btn-success.btn-lg.pull-right(type='submit')
+											select.form-control(id="uf" ng-model="profile.address.state" ng-options="s for s in estados" required)
+									button.btn.btn-success.btn-lg.pull-right(type='submit', data-ng-disabled="profileForm.$invalid")
 										span.glyphicon.glyphicon-ok  Atualizar
 
 				.panel.panel-default
@@ -65,7 +65,7 @@
 								span(ng-show='profile.step2').label.label-default.pull-right Completo
 					#pet.panel-collapse.collapse
 						.panel-body
-							form(role='form', ng-submit="addPet()")
+							form(role='form', ng-submit="addPet()", name="petForm")
 								div.alert.alert-info(ng-hide='profile.step2')
 									button.close(type="button" data-dismiss="alert" aria-hidden="true") &times;
 									strong Ganhe +5 : 
@@ -75,7 +75,7 @@
 									strong Completo! : 
 									| Você já ganhou PetiKets cadastrando seu primeiro pet
 								.form-group
-									label(for="firstName") Sobre seu Pet
+									label Sobre seu Pet
 									.row
 										.col-sm-4
 											input.form-control(type="text" id="petName" placeholder="Nome" ng-model="petObj.nome" required)
@@ -84,9 +84,9 @@
 										.col-sm-2
 											input.form-control(type="text" id="petRaca" placeholder="Raça" ng-model="petObj.raca" required)
 										.col-sm-2
-											select.form-control(id="petGender" ng-model="petObj.sexo" ng-options="s for s in sexo")
+											select.form-control(id="petGender" ng-model="petObj.sexo" ng-options="s for s in sexo" required)
 										.col-sm-2
-											button.btn.btn-success(type='submit')
+											button.btn.btn-success(type='submit', data-ng-disabled="petForm.$invalid")
 												span.glyphicon.glyphicon-plus
 							table.table.table-striped(ng-hide="!profile.pets.length")
 								thead
@@ -117,7 +117,7 @@
 									|  Para cada amigo que entrar no PetiKo utilizando seu convite
 								p.lead.text-muted Aguarde, em desenvolvimento....
 								.form-group
-									label(for="firstName") Convide seus amigos
+									label Convide seus amigos
 									.row
 										.col-sm-4
 											input(type="text" class="form-control" id="link" placeholder="link")
