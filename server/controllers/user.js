@@ -22,8 +22,9 @@ module.exports = {
                 return res.send(400, err);
 
             myprofile.name = profileUpdate.name;
-            if(dateSplitted)
-                myprofile.birthday = new Date(parseInt(dateSplitted[2]), parseInt(dateSplitted[1]), parseInt(dateSplitted[0]));
+            if(dateSplitted){
+                myprofile.birthday = new Date(parseInt(dateSplitted[2]), parseInt(dateSplitted[1])-1, parseInt(dateSplitted[0]));
+            }
             
             myprofile.gender = profileUpdate.gender;
             myprofile.address.city = profileUpdate.address.city;
