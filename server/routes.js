@@ -36,10 +36,11 @@ var routes = [
     {
         path: '/auth/facebook',
         httpMethod: 'GET',
-        middleware: [passport.authenticate('facebook')]
+        middleware: [passport.authenticate('facebook', { scope: ['email', 'birthday']})]
+        //middleware: [passport.authenticate('facebook')]
     },
     {
-        path: '/auth/facebook/callback',
+        path: '/auth/facebook/calllback',
         httpMethod: 'GET',
         middleware: [passport.authenticate('facebook', {
             successRedirect: '/profile',
